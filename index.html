@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新鮮人求職陪跑營｜RESET STUDIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #F5A623;
+      --gold-light: rgba(245,166,35,0.15);
+      --gold-dark: #D4891A;
+      --navy: #2d3a4a;
+      --navy-deep: #1a2535;
+      --navy-mid: #374151;
+      --white: #ffffff;
+      --gray-bg: #f5f5f5;
+      --gray-mid: #e5e7eb;
+      --gray-text: #6b7280;
+      --text: #1f2937;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); background: var(--white); line-height: 1.8; overflow-x: hidden; font-size: 17px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+      width: calc(100% - 40px); max-width: 920px;
+      background: rgba(255,255,255,0.93); backdrop-filter: blur(14px);
+      border-radius: 14px; border: 1px solid var(--gray-mid);
+      padding: 13px 26px; display: flex; align-items: center; justify-content: space-between;
+      z-index: 200; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+    .logo { display: flex; align-items: center; text-decoration: none; }
+    .logo-r { font-size: 13px; font-weight: 900; letter-spacing: 0.1em; color: var(--white); background: var(--navy); padding: 5px 9px; border: 1.5px solid var(--navy); }
+    .logo-s { font-size: 13px; font-weight: 900; letter-spacing: 0.1em; color: var(--navy); padding: 5px 9px; border: 1.5px solid var(--navy); border-left: none; }
+    .nav-btn { background: var(--gold); color: var(--navy); font-weight: 700; font-size: 14px; padding: 9px 20px; border-radius: 9px; text-decoration: none; transition: background .2s, transform .15s; }
+    .nav-btn:hover { background: var(--gold-dark); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #c8cbce 0%, #8a9099 30%, var(--navy-mid) 65%, var(--navy-deep) 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 120px 24px 80px; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(245,166,35,0.14) 0%, transparent 55%);
+    }
+    .hero-inner { position: relative; max-width: 740px; }
+    .hero-badge {
+      display: inline-block; background: rgba(245,166,35,.18); border: 1px solid var(--gold);
+      color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: .08em;
+      padding: 7px 20px; border-radius: 999px; margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; color: var(--white);
+      line-height: 1.18; margin-bottom: 22px; letter-spacing: -.01em;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero-sub {
+      font-size: clamp(1rem, 2.4vw, 1.15rem); color: rgba(255,255,255,.82);
+      margin-bottom: 40px; line-height: 1.85;
+    }
+    .hero-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 44px; }
+    .hero-tag { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.88); font-size: 14px; padding: 6px 16px; border-radius: 999px; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold { background: var(--gold); color: var(--navy); font-weight: 800; font-size: 16px; padding: 16px 36px; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 20px rgba(245,166,35,.4); transition: background .2s, transform .15s, box-shadow .2s; }
+    .btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,166,35,.5); }
+    .btn-outline { background: transparent; color: var(--white); font-weight: 600; font-size: 16px; padding: 16px 36px; border-radius: 12px; text-decoration: none; border: 1.5px solid rgba(255,255,255,.45); transition: border-color .2s, background .2s; }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+    .hero-tagline { margin-top: 52px; font-size: 12px; color: rgba(255,255,255,.32); letter-spacing: .2em; }
+
+    /* ── CURSOR & FOCUS ── */
+    .nav-btn, .btn-gold, .btn-outline, .price-cta, .step-tab, .faq-q { cursor: pointer; }
+    .nav-btn:focus-visible, .btn-gold:focus-visible, .btn-outline:focus-visible,
+    .price-cta:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 10px; }
+    .step-tab:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
+    .faq-q:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; border-radius: 0; }
+    .offer-step:focus-visible { outline: 2px solid rgba(245,166,35,.55); outline-offset: 5px; border-radius: 8px; }
+
+    /* ── SHARED ── */
+    section { padding: 84px 24px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .sec-label { font-size: 12px; font-weight: 700; letter-spacing: .18em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+    .sec-title { font-size: clamp(1.8rem, 4vw, 2.7rem); font-weight: 900; color: var(--navy); line-height: 1.25; margin-bottom: 14px; }
+    .sec-title em { color: var(--gold); font-style: normal; }
+    .sec-desc { font-size: 17px; color: var(--gray-text); line-height: 1.9; max-width: 580px; }
+    .bar { width: 44px; height: 3px; border-radius: 99px; background: var(--navy); margin: 18px 0 38px; }
+    .bar-gold { background: var(--gold); }
+
+    /* ── PAIN ── */
+    .pain-section { background: var(--gray-bg); }
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin-top: 38px; }
+    .pain-card { background: var(--white); border-radius: 20px; padding: 28px 24px; box-shadow: 0 2px 14px rgba(0,0,0,.06); transition: transform .2s, box-shadow .2s; }
+    .pain-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
+    .pain-num { width: 40px; height: 40px; background: var(--gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; color: var(--navy); margin-bottom: 16px; }
+    .pain-card p { font-size: 16px; font-weight: 600; color: var(--navy); line-height: 1.6; }
+    .pain-card small { display: block; margin-top: 6px; font-size: 14px; color: var(--gray-text); font-weight: 400; }
+
+    /* ── STORY ── */
+    .story-section { background: var(--white); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 40px; }
+    @media (max-width: 680px) { .story-grid { grid-template-columns: 1fr; } }
+    .story-quote { background: var(--gray-bg); border-radius: 24px; padding: 36px; border-left: 5px solid var(--gold); }
+    .story-quote p { font-size: 16px; color: var(--navy); line-height: 1.9; }
+    .story-quote p + p { margin-top: 14px; }
+    .story-quote strong { color: var(--gold); }
+    .story-right { display: flex; flex-direction: column; gap: 16px; }
+    .story-stat { background: var(--gray-bg); border-radius: 16px; padding: 22px 24px; display: flex; gap: 16px; align-items: center; }
+    .stat-num { font-size: 32px; font-weight: 900; color: var(--gold); white-space: nowrap; }
+    .stat-label { font-size: 14px; color: var(--navy); font-weight: 500; line-height: 1.5; }
+
+    /* ── JOURNEY (Offer path) ── */
+    .journey-section { background: var(--navy-deep); overflow: hidden; }
+    .journey-section .sec-title { color: var(--white); }
+    .journey-section .bar { background: var(--gold); }
+    .journey-section .sec-desc { color: rgba(255,255,255,.65); }
+
+    /* ── OFFER FLOW (vertical timeline) ── */
+    .offer-flow {
+      position: relative; margin-top: 44px;
+    }
+    .offer-flow::before {
+      content: ''; position: absolute;
+      left: 23px; top: 30px; bottom: 30px;
+      width: 1.5px; background: rgba(255,255,255,.1); z-index: 0;
+    }
+    .offer-step {
+      display: grid;
+      grid-template-columns: 170px 1fr 1fr;
+      gap: 0 20px;
+      padding: 10px 0;
+      cursor: pointer;
+      position: relative; z-index: 1;
+      transition: opacity .45s ease;
+    }
+    .offer-step:not(.active) { opacity: 0.28; }
+    .offer-step.active { opacity: 1; }
+    .offer-step:hover:not(.active) { opacity: 0.48; }
+
+    /* Step connector between rows */
+    .offer-connector { min-height: 20px; position: relative; z-index: 1; }
+
+    /* Left: badge + label */
+    .os-left { display: flex; align-items: flex-start; gap: 12px; padding-top: 2px; }
+    .os-badge {
+      width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+      background: var(--navy-deep); border: 2px solid rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 900; color: rgba(255,255,255,.45);
+      transition: all .4s ease;
+    }
+    .offer-step.active .os-badge {
+      background: var(--gold); border-color: var(--gold); color: var(--navy);
+      box-shadow: 0 0 0 7px rgba(245,166,35,.15);
+    }
+    .os-label { padding-top: 10px; }
+    .os-en { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; transition: color .4s; }
+    .os-zh { font-size: 15px; font-weight: 800; color: rgba(255,255,255,.65); line-height: 1.3; transition: color .4s; }
+    .offer-step.active .os-en { color: var(--gold); }
+    .offer-step.active .os-zh { color: var(--white); }
+
+    /* Middle: pain points — collapse when inactive */
+    .os-pain {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s ease;
+      padding-top: 2px;
+    }
+    .offer-step.active .os-pain { max-height: 280px; opacity: 1; }
+    .os-pain-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.32); margin-bottom: 10px; }
+    .os-pain ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .os-pain li { font-size: 13px; color: rgba(255,255,255,.72); line-height: 1.65; padding-left: 16px; position: relative; }
+    .os-pain li::before { content: '✕'; position: absolute; left: 0; color: #f87171; font-size: 9px; top: 5px; font-weight: 700; }
+
+    /* Right: flow — always visible, compressed when inactive */
+    .os-flow { padding-top: 2px; }
+    .os-flow .jpf-wrap { max-width: none; align-items: stretch; }
+    .os-flow .jpf-node { text-align: left; padding: 12px 16px; }
+    .os-flow .jpf-name { font-size: 13px; }
+    .os-flow .jpf-desc { font-size: 12px; }
+    .offer-step.active .os-flow .jpf-node { padding: 14px 18px; }
+    .offer-step.active .os-flow .jpf-name { font-size: 15px; }
+    .offer-step.active .os-flow .jpf-desc { font-size: 13px; }
+    .os-flow .jpf-node, .os-flow .jpf-arr { transition: padding .4s ease, font-size .4s ease; }
+    .os-flow .jpf-split { align-items: stretch; }
+
+    @media (max-width: 700px) {
+      .offer-step { grid-template-columns: 1fr; gap: 10px 0; }
+      .offer-flow::before { display: none; }
+      .os-left { padding-bottom: 4px; }
+    }
+
+    .journey-quote {
+      margin-top: 44px; padding: 24px 32px;
+      background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.3);
+      border-radius: 16px; font-size: 16px; font-weight: 700;
+      color: rgba(255,255,255,.85); text-align: center; font-style: italic;
+    }
+
+    /* ── AI SYSTEM SECTION ── */
+    .ai-system-section { background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%); }
+    .ai-system-section .sec-title { color: var(--white); }
+    .ai-system-section .bar { background: var(--gold); }
+    .ais-layout {
+      display: grid; grid-template-columns: 1fr 160px 1fr;
+      gap: 28px; margin-top: 44px; align-items: center;
+    }
+    .ais-col-label { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: .08em; margin-bottom: 14px; text-transform: uppercase; }
+    .ais-input-list { display: flex; flex-direction: column; gap: 8px; }
+    .ais-input-item {
+      padding: 11px 16px; border-radius: 12px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      font-size: 14px; color: rgba(255,255,255,.78); font-weight: 500;
+    }
+    .ais-center { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .ais-db {
+      width: 130px; height: 130px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,.22) 0%, rgba(245,166,35,.06) 100%);
+      border: 2px solid rgba(245,166,35,.55);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 12px;
+      box-shadow: 0 0 36px rgba(245,166,35,.18);
+    }
+    .ais-db-title { font-size: 13px; font-weight: 900; color: var(--gold); line-height: 1.35; }
+    .ais-db-sub { font-size: 10px; color: rgba(245,166,35,.65); margin-top: 4px; }
+    .ais-db-note { font-size: 12px; color: rgba(255,255,255,.4); text-align: center; line-height: 1.65; }
+    .ais-coach-list { display: flex; flex-direction: column; gap: 8px; }
+    .ais-coach-item {
+      padding: 11px 16px; border-radius: 12px;
+      background: rgba(245,166,35,.09); border: 1px solid rgba(245,166,35,.28);
+    }
+    .ais-coach-name { font-size: 14px; font-weight: 800; color: var(--white); }
+    .ais-coach-sub { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 3px; line-height: 1.5; }
+    .ais-section-num { font-size: 14px; font-weight: 900; color: var(--gold); margin-right: 6px; }
+    .ais-pipeline-wrap { margin-top: 40px; }
+    .ais-pipeline-label { font-size: 13px; font-weight: 700; color: rgba(255,255,255,.5); letter-spacing: .06em; margin-bottom: 18px; }
+    .ais-pipeline {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .ais-pipe-step {
+      padding: 12px 22px; border-radius: 12px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+      font-size: 15px; font-weight: 700; color: var(--white);
+    }
+    .ais-pipe-offer { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+    .ais-pipe-arr { font-size: 18px; color: rgba(255,255,255,.25); }
+    .ais-cta {
+      text-align: center; margin-top: 36px; padding: 22px 32px;
+      background: rgba(245,166,35,.08); border: 1.5px solid rgba(245,166,35,.3);
+      border-radius: 20px; font-size: 19px; font-weight: 800; color: var(--white);
+    }
+    .ais-cta em { color: var(--gold); font-style: normal; }
+    @media (max-width: 700px) {
+      .ais-layout { grid-template-columns: 1fr; }
+      .ais-center { margin: 8px 0; flex-direction: row; gap: 20px; align-items: center; }
+    }
+
+    /* ── COURSE OVERVIEW ── */
+    .system-section { background: var(--white); }
+    .course-boxes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 36px; }
+    .course-box { background: var(--gray-bg); border-radius: 18px; padding: 26px 24px; display: flex; gap: 16px; align-items: flex-start; }
+    .course-box-icon { width: 48px; height: 48px; background: var(--gold); border-radius: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .course-box-icon svg { width: 24px; height: 24px; stroke: var(--navy); fill: none; stroke-width: 2; }
+    .course-box h4 { font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .course-box p { font-size: 14px; color: var(--gray-text); line-height: 1.7; }
+    @media (max-width: 560px) { .course-boxes { grid-template-columns: 1fr; } }
+
+    /* ── FIVE STEPS ── */
+    .steps-section { background: var(--gray-bg); }
+    .steps-nav { display: flex; gap: 0; margin: 32px 0 36px; border-radius: 16px; overflow: hidden; background: var(--white); border: 1.5px solid var(--gray-mid); }
+    .step-tab { flex: 1; padding: 15px 8px; text-align: center; cursor: pointer; border: none; background: transparent; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--gray-text); transition: background .2s, color .2s; line-height: 1.4; }
+    .step-tab small { display: block; font-size: 11px; font-weight: 400; opacity: .7; }
+    .step-tab.active { background: var(--gold); color: var(--navy); font-weight: 800; }
+    .step-tab.active small { opacity: .7; }
+    .step-panel { display: none; }
+    .step-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    @media (max-width: 640px) { .step-panel.active { grid-template-columns: 1fr; } .steps-nav { flex-wrap: wrap; justify-content: center; } .step-tab { flex: 0 0 33.33%; font-size: 12px; } }
+    .step-pain { background: var(--white); border-radius: 20px; padding: 28px 26px; }
+    .step-pain h4 { font-size: 12px; font-weight: 700; color: var(--gray-text); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+    .step-pain ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .step-pain li { font-size: 15px; color: var(--navy); line-height: 1.65; padding-left: 20px; position: relative; }
+    .step-pain li::before { content: '✕'; position: absolute; left: 0; color: #ef4444; font-size: 11px; top: 4px; font-weight: 700; }
+    .step-solution { background: var(--navy); border-radius: 20px; padding: 28px 26px; }
+    .step-solution h4 { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+    .step-solution p { font-size: 15px; color: rgba(255,255,255,.82); line-height: 1.8; }
+    .step-solution ul { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
+    .step-solution li { font-size: 15px; color: rgba(255,255,255,.78); line-height: 1.65; padding-left: 20px; position: relative; }
+    .step-solution li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+    .step-solution strong { color: var(--gold); }
+    .step-output { margin-top: 20px; padding: 14px 18px; background: rgba(245,166,35,.15); border: 1px solid rgba(245,166,35,.3); border-radius: 10px; font-size: 14px; color: var(--gold); font-weight: 600; line-height: 1.7; }
+
+    /* ── COMPARE ── */
+    .compare-section { background: var(--navy); }
+    .compare-section .sec-title { color: var(--white); }
+    .compare-section .bar { background: var(--gold); }
+
+    .compare-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 24px; margin-top: 40px; }
+    @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+
+    .compare-col { border-radius: 20px; overflow: hidden; }
+    .compare-col-head { padding: 18px 24px; font-size: 15px; font-weight: 800; }
+    .compare-col.old .compare-col-head { background: rgba(255,255,255,.07); color: rgba(255,255,255,.55); }
+    .compare-col.new .compare-col-head { background: rgba(245,166,35,.2); color: var(--gold); border: 1.5px solid rgba(245,166,35,.35); border-bottom: none; }
+    .compare-rows { display: flex; flex-direction: column; }
+    .compare-row { padding: 16px 24px; font-size: 15px; line-height: 1.75; }
+    .compare-row:nth-child(odd) { background: rgba(255,255,255,.04); }
+    .compare-col.old .compare-row { color: rgba(255,255,255,.45); font-size: 14px; }
+    .compare-col.new .compare-row { color: rgba(255,255,255,.92); font-size: 16px; font-weight: 600; border-left: 1.5px solid rgba(245,166,35,.3); border-right: 1.5px solid rgba(245,166,35,.3); }
+    .compare-col.new .compare-col-head { font-size: 17px; }
+    .compare-col.new .compare-row:last-child { border-bottom: 1.5px solid rgba(245,166,35,.3); border-radius: 0 0 12px 12px; }
+    .compare-col.old .compare-row:last-child { border-radius: 0 0 12px 12px; }
+    .compare-row strong { color: var(--gold); }
+    .compare-row .row-label { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; display: block; margin-bottom: 4px; opacity: .7; }
+
+    /* ── 20% HUMAN ── */
+    .human-section { background: var(--gray-bg); }
+    .human-layout { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: start; margin-top: 40px; }
+    @media (max-width: 640px) { .human-layout { grid-template-columns: 1fr; } }
+    .pct-ring { width: 128px; height: 128px; border-radius: 50%; border: 8px solid var(--gold); display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--white); box-shadow: 0 4px 28px rgba(245,166,35,.3); }
+    .pct-num { font-size: 30px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .pct-label { font-size: 11px; color: var(--navy); font-weight: 700; margin-top: 3px; letter-spacing: .05em; }
+    .human-items { display: flex; flex-direction: column; gap: 16px; }
+    .human-item { background: var(--white); border-radius: 16px; padding: 22px 26px; display: flex; gap: 16px; align-items: flex-start; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+    .hi-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 7px; }
+    .human-item h4 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .human-item p { font-size: 14px; color: var(--gray-text); line-height: 1.75; }
+
+    /* ── TIMELINE ── */
+    .timeline-section { background: var(--navy-deep); }
+    .timeline-section .sec-title { color: var(--white); }
+    .timeline-section .bar { background: var(--gold); }
+    .tl-phases { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+    .tl-phase-wrap {}
+    .tl-phase-hd {
+      display: flex; align-items: center; gap: 12px; padding: 16px 22px;
+      background: var(--navy); color: var(--white); border-radius: 14px;
+      font-size: 15px; font-weight: 800; margin-bottom: 16px;
+    }
+    .tl-phase-hd.gold { background: rgba(245,166,35,.12); color: var(--gold); border: 1.5px solid rgba(245,166,35,.3); }
+    .tl-phase-badge { font-size: 11px; margin-left: auto; opacity: .5; }
+    .tl-list { display: flex; flex-direction: column; gap: 12px; padding-left: 0; position: relative; }
+    .tl-list::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: var(--gray-mid); border-radius: 2px; }
+    .tl-row { display: flex; gap: 18px; align-items: flex-start; position: relative; }
+    .tl-dot {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--gold); border: 4px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 12px; color: var(--navy);
+      flex-shrink: 0; position: relative; z-index: 2;
+    }
+    .tl-dot.navy-dot { background: var(--navy); color: var(--gold); box-shadow: 0 0 0 2px var(--navy); }
+    .tl-dot.star { background: var(--gold); font-size: 18px; }
+    .tl-card { background: var(--gray-bg); border-radius: 16px; padding: 20px 24px; flex: 1; }
+    .tl-card.highlight { border: 2px solid var(--gold); background: rgba(245,166,35,.05); }
+    .tl-date { font-size: 13px; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+    .tl-card h4 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .tl-card ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .tl-card li { font-size: 14px; color: var(--gray-text); padding-left: 14px; position: relative; line-height: 1.6; }
+    .tl-card li::before { content: '·'; position: absolute; left: 0; color: var(--gold); font-size: 18px; line-height: 1; top: 2px; }
+
+    /* ── INSTRUCTOR ── */
+    .instructor-section { background: linear-gradient(160deg, #c8cdd3 0%, #8e959f 100%); }
+    .instructor-card { background: var(--white); border-radius: 28px; padding: 44px; display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start; box-shadow: 0 8px 40px rgba(0,0,0,.1); margin-top: 40px; }
+    @media (max-width: 620px) { .instructor-card { grid-template-columns: 1fr; text-align: center; } }
+    .avatar { width: 116px; height: 116px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 900; color: var(--gold); flex-shrink: 0; overflow: hidden; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .inst-name { font-size: 24px; font-weight: 900; color: var(--navy); }
+    .inst-role { font-size: 14px; color: var(--gray-text); margin: 4px 0 22px; }
+    .inst-stats { display: flex; flex-direction: column; gap: 9px; }
+    .inst-stat { display: flex; gap: 10px; align-items: center; font-size: 14px; }
+    .inst-badge { background: var(--navy); color: var(--gold); font-size: 14px; font-weight: 700; padding: 6px 16px; border-radius: 999px; white-space: nowrap; }
+    .inst-sep { color: var(--gold); }
+    .inst-quote { margin-top: 26px; padding: 20px 24px; background: var(--gray-bg); border-left: 4px solid var(--gold); border-radius: 0 14px 14px 0; font-size: 15px; color: var(--navy); font-style: italic; line-height: 1.85; }
+
+    /* ── URGENCY BANNER ── */
+    .urgency-bar {
+      background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold) 100%);
+      padding: 14px 24px; text-align: center;
+      font-size: 15px; font-weight: 700; color: var(--navy);
+      position: sticky; top: 72px; z-index: 100;
+      box-shadow: 0 2px 16px rgba(245,166,35,.4);
+    }
+    .urgency-bar span { opacity: .7; font-weight: 500; margin-left: 8px; font-size: 14px; }
+
+    /* ── PRICING ── */
+    .pricing-section { background: var(--white); }
+    .pricing-note { font-size: 15px; color: var(--gray-text); margin-top: 6px; }
+    .pricing-note strong { color: var(--gold); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; margin-top: 40px; }
+    .price-card { border-radius: 24px; padding: 38px 34px; transition: transform .2s, box-shadow .2s; }
+    .price-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+    .price-card.basic { background: var(--gray-bg); border: 2px solid var(--gray-mid); }
+    .price-card.premium { background: var(--navy); border: 2px solid var(--navy); }
+    .price-tier { font-size: 12px; font-weight: 700; letter-spacing: .1em; margin-bottom: 7px; }
+    .basic .price-tier { color: var(--gray-text); }
+    .premium .price-tier { color: var(--gold); }
+    .price-name { font-size: 22px; font-weight: 900; margin-bottom: 5px; }
+    .basic .price-name { color: var(--navy); }
+    .premium .price-name { color: var(--white); }
+    .price-for { font-size: 14px; margin-bottom: 20px; line-height: 1.6; }
+    .basic .price-for { color: var(--gray-text); }
+    .premium .price-for { color: rgba(255,255,255,.6); }
+    .price-amount { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; margin-bottom: 4px; }
+    .basic .price-amount { color: var(--navy); }
+    .premium .price-amount { color: var(--gold); }
+    .price-sub { font-size: 13px; margin-bottom: 24px; }
+    .basic .price-sub { color: var(--gray-text); }
+    .premium .price-sub { color: rgba(255,255,255,.45); }
+    .price-hr { height: 1px; margin-bottom: 24px; }
+    .basic .price-hr { background: var(--gray-mid); }
+    .premium .price-hr { background: rgba(255,255,255,.12); }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; }
+    .price-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; }
+    .basic .price-list li { color: var(--navy); }
+    .premium .price-list li { color: rgba(255,255,255,.85); }
+    .chk { width: 20px; height: 20px; border-radius: 50%; background: var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .chk svg { width: 10px; height: 10px; stroke: var(--navy); fill: none; stroke-width: 3; }
+    .fee-box { background: rgba(245,166,35,.12); border: 1px solid rgba(245,166,35,.3); border-radius: 14px; padding: 18px 20px; margin: 18px 0; }
+    .fee-box h5 { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+    .fee-row { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.75; }
+    .fee-row + .fee-row { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.08); }
+    .fee-row strong { color: var(--gold); }
+    .price-limit { font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 999px; display: inline-block; margin-bottom: 20px; }
+    .basic .price-limit { background: rgba(45,58,74,.08); color: var(--navy); }
+    .premium .price-limit { background: rgba(245,166,35,.2); color: var(--gold); }
+    .price-cta { display: block; text-align: center; padding: 15px 22px; border-radius: 12px; font-weight: 700; font-size: 16px; text-decoration: none; transition: background .2s, transform .15s; }
+    .basic .price-cta { background: var(--navy); color: var(--white); }
+    .basic .price-cta:hover { background: var(--navy-deep); transform: translateY(-1px); }
+    .premium .price-cta { background: var(--gold); color: var(--navy); }
+    .premium .price-cta:hover { background: var(--gold-dark); transform: translateY(-1px); }
+
+    /* ── PROMISES ── */
+    .promise-section { background: var(--gray-bg); }
+    .promise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 40px; }
+    .promise-card { background: var(--white); border-radius: 20px; padding: 30px 26px; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+    .promise-icon { width: 44px; height: 44px; background: var(--gold); border-radius: 13px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .promise-icon svg { width: 22px; height: 22px; stroke: var(--navy); fill: none; stroke-width: 2.5; }
+    .promise-card h4 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .promise-card p { font-size: 14px; color: var(--gray-text); line-height: 1.7; }
+
+    /* ── WHO ── */
+    .who-section { background: var(--white); }
+    .who-split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 40px; }
+    @media (max-width: 580px) { .who-split { grid-template-columns: 1fr; } }
+    .who-col { border-radius: 20px; padding: 30px 26px; }
+    .who-col.no { background: var(--gray-bg); border: 2px solid var(--gray-mid); }
+    .who-col.yes { background: var(--navy); border: 2px solid var(--navy); }
+    .who-col h4 { font-size: 16px; font-weight: 800; margin-bottom: 18px; }
+    .who-col.no h4 { color: var(--gray-text); }
+    .who-col.yes h4 { color: var(--gold); }
+    .who-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .who-col.no li { font-size: 15px; color: var(--navy); padding-left: 24px; position: relative; line-height: 1.6; }
+    .who-col.no li::before { content: '✕'; position: absolute; left: 0; color: #ef4444; font-weight: 700; }
+    .who-col.yes li { font-size: 15px; color: rgba(255,255,255,.85); padding-left: 24px; position: relative; line-height: 1.6; }
+    .who-col.yes li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+    .who-note { margin-top: 22px; padding: 18px 24px; background: var(--gold-light); border: 1.5px solid var(--gold); border-radius: 14px; font-size: 15px; color: var(--navy); display: flex; gap: 12px; align-items: center; line-height: 1.7; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section { background: var(--gray-bg); }
+    .featured-t { background: var(--navy); border-radius: 24px; padding: 40px; margin-top: 40px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; }
+    @media (max-width: 580px) { .featured-t { grid-template-columns: 1fr; } }
+    .ft-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; color: var(--navy); flex-shrink: 0; overflow: hidden; }
+    .ft-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .ft-name { font-size: 17px; font-weight: 800; color: var(--white); }
+    .ft-bg { font-size: 14px; color: rgba(255,255,255,.5); margin-bottom: 14px; }
+    .ft-quote { font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.9; font-style: italic; }
+    .ft-result { margin-top: 18px; padding: 14px 20px; background: rgba(245,166,35,.15); border: 1px solid rgba(245,166,35,.3); border-radius: 10px; font-size: 14px; color: var(--gold); font-weight: 700; line-height: 1.6; }
+    .t-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 20px; }
+    .t-card { background: var(--white); border-radius: 18px; padding: 26px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .t-head { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+    .t-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; color: var(--navy); flex-shrink: 0; }
+    .t-name { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .t-school { font-size: 13px; color: var(--gray-text); }
+    .t-stars { color: var(--gold); font-size: 14px; margin-left: auto; font-style: normal; }
+    .t-body { font-size: 14px; color: var(--gray-text); line-height: 1.8; }
+    .t-tag { display: inline-block; margin-top: 12px; background: var(--gold-light); border: 1px solid rgba(245,166,35,.3); color: var(--gold); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--white); }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 40px; }
+    .faq-item { border: 1.5px solid var(--gray-mid); border-radius: 16px; overflow: hidden; }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; padding: 20px 26px; cursor: pointer; user-select: none; gap: 16px; }
+    .faq-q span { font-size: 16px; font-weight: 700; color: var(--navy); }
+    .faq-arr { width: 32px; height: 32px; border-radius: 50%; background: var(--gray-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .25s, background .2s; }
+    .faq-arr svg { width: 13px; height: 13px; stroke: var(--navy); fill: none; stroke-width: 2.5; }
+    .faq-item.open .faq-arr { transform: rotate(180deg); background: var(--gold); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-a-inner { padding: 0 26px 22px; font-size: 15px; color: var(--gray-text); line-height: 1.9; }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-item.open .faq-q { border-bottom: 1px solid var(--gray-mid); }
+
+    /* ── FINAL CTA ── */
+    .cta-section { background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy-mid) 100%); text-align: center; padding: 100px 24px; }
+    .cta-section .sec-label { display: block; text-align: center; }
+    .cta-section .sec-title { color: var(--white); text-align: center; }
+    .cta-section .bar { margin: 18px auto 30px; background: var(--gold); }
+    .cta-section .sec-desc { color: rgba(255,255,255,.7); margin: 0 auto 40px; text-align: center; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-deep); padding: 34px 24px; text-align: center; }
+    .footer-logo { display: flex; gap: 0; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .fl-r { font-size: 12px; font-weight: 900; letter-spacing: .1em; color: var(--white); padding: 4px 8px; border: 1px solid rgba(255,255,255,.25); }
+    .fl-s { font-size: 12px; font-weight: 900; letter-spacing: .1em; color: rgba(255,255,255,.45); padding: 4px 8px; border: 1px solid rgba(255,255,255,.25); border-left: none; }
+    footer p { font-size: 12px; color: rgba(255,255,255,.22); letter-spacing: .18em; margin-top: 6px; }
+
+    /* ── STORY PHOTO LAYOUT ── */
+    .story-layout { display: grid; grid-template-columns: 210px 1fr; gap: 28px; align-items: start; margin-top: 40px; }
+    @media (max-width: 680px) { .story-layout { grid-template-columns: 1fr; } .story-photo-col { display: none; } }
+    .story-photo-wrap { background: var(--navy-deep); border-radius: 20px 20px 0 0; overflow: hidden; height: 260px; position: relative; }
+    .story-photo-wrap img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 100%; width: auto; max-width: none; }
+    .story-name-card { background: var(--navy); border-radius: 0 0 20px 20px; padding: 13px 16px; text-align: center; }
+    .story-name-card .sn-name { font-size: 15px; font-weight: 800; color: var(--white); }
+    .story-name-card .sn-role { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 2px; }
+
+    .journey-hint { font-size: 13px; color: rgba(255,255,255,.28); text-align: center; margin-top: 12px; letter-spacing: .04em; }
+
+    /* flowchart inside each panel */
+    .jpf-wrap { display: flex; flex-direction: column; align-items: center; max-width: 500px; margin: 0 auto; }
+    .jpf-node { width: 100%; padding: 16px 22px; border-radius: 14px; text-align: center; }
+    .jpf-tool { background: rgba(255,255,255,.07); border: 1.5px solid rgba(255,255,255,.18); }
+    .jpf-output { background: rgba(245,166,35,.1); border: 1.5px solid rgba(245,166,35,.5); }
+    .jpf-optional { background: rgba(255,255,255,.04); border: 1.5px dashed rgba(255,255,255,.22); }
+    .jpf-tag { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+    .jpf-optional .jpf-tag { color: rgba(255,255,255,.4); }
+    .jpf-name { font-size: 15px; font-weight: 800; color: var(--white); line-height: 1.35; }
+    .jpf-output .jpf-name { color: var(--gold); }
+    .jpf-desc { font-size: 13px; color: rgba(255,255,255,.55); margin-top: 5px; line-height: 1.6; }
+    .jpf-output .jpf-desc { color: rgba(255,255,255,.72); }
+    .jpf-arr { width: 2px; height: 26px; background: rgba(255,255,255,.18); position: relative; flex-shrink: 0; align-self: center; margin-bottom: 8px; }
+    .jpf-arr::after { content: ''; position: absolute; bottom: -7px; left: 50%; transform: translateX(-50%); border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid rgba(255,255,255,.18); }
+    .jpf-arr.gold { background: rgba(245,166,35,.45); }
+    .jpf-arr.gold::after { border-top-color: rgba(245,166,35,.45); }
+    .jpf-cond { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.35); letter-spacing: .06em; margin: 2px 0; }
+    .jpf-split { display: flex; gap: 14px; width: 100%; }
+    .jpf-split .jpf-node { flex: 1; }
+    .jpf-db {
+      background: rgba(15,23,42,.65); border: 1.5px dashed rgba(148,163,184,.3);
+    }
+    .jpf-db .jpf-tag { color: rgba(148,163,184,.65); }
+    .jpf-db .jpf-name { color: rgba(203,213,225,.8); }
+    .jpf-source {
+      font-size: 10px; font-weight: 700; color: rgba(148,163,184,.9);
+      letter-spacing: .06em; margin-bottom: 7px; display: inline-block;
+      padding: 3px 9px; background: rgba(148,163,184,.12);
+      border: 1px solid rgba(148,163,184,.28); border-radius: 4px;
+    }
+    .offer-connector-db {
+      font-size: 10px; color: rgba(148,163,184,.55); letter-spacing: .05em;
+      padding: 2px 10px; background: rgba(15,23,42,.5);
+      border: 1px dashed rgba(148,163,184,.22); border-radius: 4px; white-space: nowrap;
+    }
+
+    /* ── COACH HEADLINE ── */
+    .coach-headline { margin-bottom: 20px; }
+    .ch-top { font-size: 15px; font-weight: 500; color: var(--gray-text); letter-spacing: .01em; }
+    .ch-big { font-size: clamp(4.5rem, 14vw, 7rem); font-weight: 900; line-height: .9; margin: 2px 0 6px; }
+    .ch-big em { color: var(--gold); font-style: normal; }
+    .ch-sub { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 900; color: var(--navy); line-height: 1.2; }
+    .ch-sub em { color: var(--gold); font-style: normal; }
+
+    /* ── COACH SECTION (merged instructor + 20%) ── */
+    .coach-section { background: var(--gray-bg); }
+    .coach-card { display: grid; grid-template-columns: 250px 1fr; background: var(--white); border-radius: 28px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,.1); margin-top: 40px; }
+    @media (max-width: 720px) { .coach-card { grid-template-columns: 1fr; } }
+    .coach-photo-side { background: var(--navy-deep); display: flex; flex-direction: column; }
+    .coach-photo-frame { flex: 1; overflow: hidden; position: relative; min-height: 280px; }
+    .coach-photo-frame img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 100%; width: auto; max-width: none; object-fit: contain; object-position: center bottom; }
+    .coach-nameplate { background: var(--navy); padding: 18px 22px; }
+    .coach-nameplate h3 { font-size: 18px; font-weight: 900; color: var(--white); }
+    .coach-nameplate p { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 2px; }
+    .coach-content { padding: 32px 36px; display: flex; flex-direction: column; gap: 16px; }
+    @media (max-width: 600px) { .coach-content { padding: 24px 20px; } }
+    .coach-creds { display: flex; flex-direction: column; gap: 8px; }
+    .coach-cred { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 15px; color: var(--navy); line-height: 1.5; }
+    .coach-cred .cb { background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; flex-shrink: 0; }
+    .coach-quote { padding: 14px 18px; background: var(--gray-bg); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; font-size: 14px; color: var(--navy); font-style: italic; line-height: 1.8; }
+    .coach-divider { height: 1px; background: var(--gray-mid); }
+    .coach-human-label { font-size: 18px; font-weight: 900; letter-spacing: .04em; color: var(--gold); margin-bottom: 14px; }
+    .coach-stats-label { font-size: 13px; font-weight: 700; letter-spacing: .1em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; margin-top: 4px; }
+    .coach-human-items { display: flex; flex-direction: column; gap: 12px; }
+    .chi { display: flex; gap: 12px; align-items: flex-start; }
+    .chi-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 7px; }
+    .chi h5 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .chi p { font-size: 14px; color: var(--gray-text); line-height: 1.65; }
+
+    /* ── FLOWCHART TIMELINE ── */
+    .flow-chart { display: flex; flex-direction: column; align-items: center; margin-top: 44px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .flow-box { border-radius: 16px; padding: 18px 28px; text-align: center; width: 100%; }
+    .flow-box.b-navy { background: var(--navy); }
+    .flow-box.b-navy h4 { color: var(--white); font-size: 17px; font-weight: 900; line-height: 1.3; }
+    .flow-box.b-navy p { color: rgba(255,255,255,.6); font-size: 14px; margin-top: 5px; line-height: 1.55; }
+    .flow-box.b-gold { background: var(--gold); }
+    .flow-box.b-gold h4 { color: var(--navy); font-size: 17px; font-weight: 900; line-height: 1.3; }
+    .flow-box.b-gold p { color: rgba(45,58,74,.7); font-size: 14px; margin-top: 5px; line-height: 1.55; }
+    .flow-box.b-outline { background: transparent; border: 2px solid rgba(255,255,255,.25); }
+    .flow-box.b-outline h4 { color: var(--white); font-size: 16px; font-weight: 800; }
+    .flow-box.b-outline p { color: rgba(255,255,255,.55); font-size: 13px; margin-top: 4px; }
+    .flow-arr { display: flex; flex-direction: column; align-items: center; padding: 2px 0; }
+    .flow-arr::before { content: ''; width: 2px; height: 14px; background: rgba(255,255,255,.2); }
+    .flow-arr::after { content: ''; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 9px solid rgba(255,255,255,.2); }
+    .flow-row { display: flex; gap: 10px; width: 100%; }
+    .flow-row .flow-box { flex: 1; padding: 15px 12px; }
+    .flow-row .flow-box h4 { font-size: 15px; }
+    .flow-row .flow-box p { font-size: 13px; }
+    .flow-final { background: var(--gold); border-radius: 20px; padding: 22px 36px; text-align: center; width: 100%; }
+    .flow-final h4 { font-size: 22px; font-weight: 900; color: var(--navy); }
+    .flow-note { font-size: 13px; color: rgba(255,255,255,.35); margin-top: 14px; letter-spacing: .04em; }
+
+    /* ── COACH STATS ── */
+    .coach-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 500px) { .coach-stats { grid-template-columns: 1fr; } }
+    .coach-stat { background: var(--gray-bg); border-radius: 12px; padding: 16px 12px; text-align: center; }
+    .coach-stat-num { font-size: 34px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .coach-stat-label { font-size: 12px; color: var(--navy); font-weight: 600; line-height: 1.45; margin-top: 5px; }
+
+    /* ── FLOW BOXES ── */
+    .flow-hd { display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .flow-hd h4, .flow-hd p { margin: 0; }
+    .flow-expand { }
+    .flow-expand-inner { padding-top: 12px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,.15); text-align: center; }
+    .b-gold .flow-expand-inner { border-top-color: rgba(45,58,74,.15); }
+    .flow-expand-inner ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .flow-expand-inner li { font-size: 13px; line-height: 1.6; }
+    .flow-expand-inner li::before { content: none; }
+    .b-navy .flow-expand-inner { color: rgba(255,255,255,.65); }
+    .b-navy .flow-expand-inner li::before { color: var(--gold); }
+    .b-gold .flow-expand-inner { color: rgba(45,58,74,.7); }
+    .b-gold .flow-expand-inner li::before { color: var(--navy-deep); }
+    .b-outline .flow-expand-inner { color: rgba(255,255,255,.65); }
+    .b-outline .flow-expand-inner li::before { color: var(--gold); }
+    .flow-expand-inner .fl-date { font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+    .b-gold .flow-expand-inner .fl-date { color: var(--navy); }
+
+    /* ── TIMELINE CARD GRID ── */
+    .tl-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .tl-card-top h4 { font-size: 15px; font-weight: 800; color: var(--navy); }
+    .tl-output-tag { font-size: 11px; font-weight: 700; color: var(--gold); background: var(--gold-light); border: 1px solid rgba(245,166,35,.3); padding: 4px 10px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+    .tl-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 14px; }
+    @media (max-width: 580px) { .tl-card-grid { grid-template-columns: 1fr; } }
+    .tl-card-grid li { font-size: 13px; color: var(--gray-text); padding-left: 14px; position: relative; line-height: 1.6; }
+    .tl-card-grid li::before { content: '·'; position: absolute; left: 0; color: var(--gold); font-size: 18px; line-height: 1; top: 2px; }
+
+    /* ── ANIMATE ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
+      .fade.in { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .offer-step, .os-pain, .os-badge, .faq-a, .faq-arr,
+      .pain-card, .price-card, .nav-btn, .btn-gold, .btn-outline { transition: none !important; }
+      .fade { transition: none !important; opacity: 1 !important; transform: none !important; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 64px 20px; }
+      nav { width: calc(100% - 28px); padding: 12px 18px; }
+      .price-card { padding: 28px 24px; }
+      .instructor-card { padding: 28px 24px; }
+      .featured-t { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#"><span class="logo-r">RESET</span><span class="logo-s">STUDIO</span></a>
+  <a class="nav-btn" href="#pricing">立即加入</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">新鮮人求職陪跑營 · 2026</div>
+    <h1>3 週建立求職系統，<br><em>3 個月</em>陪你拿到<br>第一份 offer</h1>
+    <p class="hero-sub">
+      給應屆畢業生 / 轉職新鮮人，一套從作品集、履歷、職缺分析<br>到面試上場的 AI 求職陪跑營。
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">應屆畢業生</span>
+      <span class="hero-tag">工作經驗 &lt; 2 年</span>
+      <span class="hero-tag">轉職新鮮人</span>
+      <span class="hero-tag">7 大 AI 教練</span>
+    </div>
+    <div class="hero-btns">
+      <a class="btn-gold" href="#pricing">選擇方案加入</a>
+      <a class="btn-outline" href="#consult">先免費聊聊</a>
+    </div>
+    <p class="hero-tagline">reset your life, enrich your life</p>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain-section">
+  <div class="container fade">
+    <div class="sec-label">你也有這些卡點嗎？</div>
+    <h2 class="sec-title">你大學四年做了一堆事，<br>打開履歷卻<em>一片空白</em>？</h2>
+    <div class="bar"></div>
+    <p class="sec-desc">修過課、實習過、跑過社團，但打開履歷覺得沒什麼好寫的。其實你有超多閃光點，是你自己不知道的，你只是還沒有人陪你把經歷整理成履歷！</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-num">1</div>
+        <p>沒明確職涯目標<br>不知自己適合什麼工作</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">2</div>
+        <p>有社團、競賽、實習<br>但不知如何整理成履歷</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">3</div>
+        <p>投了很多履歷<br>卻沒有面試通知</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">4</div>
+        <p>想用 AI 工具加速求職<br>但不知從何開始</p>
+        <small>沒用過 Notion 也沒關係，帶你快速上手</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY / ABOUT -->
+<section class="story-section">
+  <div class="container fade">
+    <div class="sec-label">關於這個陪跑營</div>
+    <h2 class="sec-title">這不只是一堂履歷課，<br><em>我會陪你拿到第一份 offer</em></h2>
+    <div class="bar"></div>
+    <div class="story-layout">
+      <div class="story-photo-col">
+        <div class="story-photo-wrap">
+          <img src="jerry-photo.png" alt="邱耀陞 Jerry">
+        </div>
+        <div class="story-name-card">
+          <div class="sn-name">邱耀陞 Jerry</div>
+          <div class="sn-role">生涯教練 ／ 重啟人生計劃 創辦人</div>
+        </div>
+      </div>
+      <div class="story-quote">
+        <p>嗨，我是耀陞，《重啟人生計劃》的創辦人。</p>
+        <p>這三年來我諮詢了超過 <strong>200 位學生</strong>，幫助 30+ 位學生轉換跑道、找到第一份正職與實習機會，也陪他們在迷惘裡重新看見自己的可能性。</p>
+        <p>我發現，求職不只是寫履歷而已。更重要的是，需要有人陪你一起思考，看見那些你沒有想過的選擇。</p>
+        <p>讓我帶你看見那個你沒想過的未來，拿到真正屬於你的 Dream Job！</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY + FIVE STEPS (merged) -->
+<section class="journey-section">
+  <div class="container fade">
+    <div class="sec-label">OFFER 五步驟</div>
+    <h2 class="sec-title">一次打包帶走<br><em>完整求職旅程成果</em></h2>
+    <div class="bar bar-gold"></div>
+    <p class="sec-desc">點擊每個步驟，看 AI 教練如何幫你把問題解掉。</p>
+
+    <div class="offer-flow">
+
+      <!-- Step 0: Organize -->
+      <div class="offer-step active" onclick="selectStep(0)">
+        <div class="os-left">
+          <div class="os-badge">O</div>
+          <div class="os-label">
+            <div class="os-en">Organize</div>
+            <div class="os-zh">整理經歷</div>
+          </div>
+        </div>
+        <div class="os-pain">
+          <div class="os-pain-label">你可能遇到的困境</div>
+          <ul>
+            <li>做過很多事，但一被問「你的亮點是什麼」就腦袋空白</li>
+            <li>作品集散落各地，要寫履歷只能靠回憶硬湊</li>
+            <li>不知道該寫什麼才是重點，寫出來像流水帳</li>
+          </ul>
+        </div>
+        <div class="os-flow">
+          <div class="jpf-wrap">
+            <div class="jpf-node jpf-tool">
+              <div class="jpf-tag">AI 教練</div>
+              <div class="jpf-name">問題解決履歷教練</div>
+              <div class="jpf-desc">一題一題追問你的解題過程、決策邏輯、累積能力</div>
+            </div>
+            <div class="jpf-arr gold"></div>
+            <div class="jpf-node jpf-output">
+              <div class="jpf-tag">產出</div>
+              <div class="jpf-name">至少 3 份作品集</div>
+              <div class="jpf-desc">可驗證的專案故事，讓 HR 一眼讀懂你的亮點</div>
+            </div>
+            <div class="jpf-arr"></div>
+            <div class="jpf-node jpf-db">
+              <div class="jpf-tag">寫入資料庫</div>
+              <div class="jpf-name">作品集資料庫</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-connector"></div>
+
+      <!-- Step 1: Find -->
+      <div class="offer-step" onclick="selectStep(1)">
+        <div class="os-left">
+          <div class="os-badge">F</div>
+          <div class="os-label">
+            <div class="os-en">Find</div>
+            <div class="os-zh">找到方向</div>
+          </div>
+        </div>
+        <div class="os-pain">
+          <div class="os-pain-label">你可能遇到的困境</div>
+          <ul>
+            <li>說不出「我想做什麼」，每次被問都只會說「都可以」</li>
+            <li>打開 104 不知道要搜什麼關鍵字，亂投一通</li>
+            <li>不確定哪些職缺真的適合自己，選了怕後悔</li>
+          </ul>
+        </div>
+        <div class="os-flow">
+          <div class="jpf-wrap">
+            <div class="jpf-node jpf-tool">
+              <div class="jpf-tag">AI 教練</div>
+              <div class="jpf-name">天職分析教練</div>
+              <span class="jpf-source">讀取：作品集資料庫</span>
+              <div class="jpf-desc">萃取你的價值觀、能力、興趣，整合成 IKIGAI</div>
+            </div>
+            <div class="jpf-arr gold"></div>
+            <div class="jpf-split">
+              <div class="jpf-node jpf-output">
+                <div class="jpf-tag">產出</div>
+                <div class="jpf-name">3 個職涯方向</div>
+              </div>
+              <div class="jpf-node jpf-output">
+                <div class="jpf-tag">產出</div>
+                <div class="jpf-name">9 個真實職缺（JD）</div>
+              </div>
+            </div>
+            <div class="jpf-arr"></div>
+            <div class="jpf-node jpf-db">
+              <div class="jpf-tag">寫入資料庫</div>
+              <div class="jpf-name">職缺清單</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-connector"></div>
+
+      <!-- Step 2: Focus -->
+      <div class="offer-step" onclick="selectStep(2)">
+        <div class="os-left">
+          <div class="os-badge">F</div>
+          <div class="os-label">
+            <div class="os-en">Focus</div>
+            <div class="os-zh">鎖定職缺</div>
+          </div>
+        </div>
+        <div class="os-pain">
+          <div class="os-pain-label">你可能遇到的困境</div>
+          <ul>
+            <li>看不懂 JD 在說什麼，只看到一堆模糊要求</li>
+            <li>不知道這個職缺真正在意什麼能力</li>
+            <li>想做 Coffee Chat 但不知從哪找人、怎麼開口</li>
+          </ul>
+        </div>
+        <div class="os-flow">
+          <div class="jpf-wrap">
+            <div class="jpf-node jpf-tool">
+              <div class="jpf-tag">AI 教練</div>
+              <div class="jpf-name">職缺分析教練</div>
+              <span class="jpf-source">讀取：作品集資料庫 + 職缺清單</span>
+              <div class="jpf-desc">針對 9 個職缺深度拆解</div>
+            </div>
+            <div class="jpf-arr gold"></div>
+            <div class="jpf-node jpf-output">
+              <div class="jpf-tag">產出</div>
+              <div class="jpf-name">每個職缺的「工作真相」</div>
+              <div class="jpf-desc">關鍵能力 / 關鍵字 / 公司文化 / 風險</div>
+            </div>
+            <div class="jpf-arr"></div>
+            <div class="jpf-node jpf-db">
+              <div class="jpf-tag">寫入資料庫</div>
+              <div class="jpf-name">職缺深度分析</div>
+            </div>
+            <div class="jpf-arr"></div>
+            <div class="jpf-cond">資訊不足？補充情報</div>
+            <div class="jpf-arr"></div>
+            <div class="jpf-node jpf-optional">
+              <div class="jpf-tag">補充工具</div>
+              <div class="jpf-name">Coffee Chat 教練</div>
+              <div class="jpf-desc">邀請信 → 訪綱 → 感謝信 → 訪談收穫回填職缺資料庫</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-connector"></div>
+
+      <!-- Step 3: Express -->
+      <div class="offer-step" onclick="selectStep(3)">
+        <div class="os-left">
+          <div class="os-badge">E</div>
+          <div class="os-label">
+            <div class="os-en">Express</div>
+            <div class="os-zh">表達自己</div>
+          </div>
+        </div>
+        <div class="os-pain">
+          <div class="os-pain-label">你可能遇到的困境</div>
+          <ul>
+            <li>每投一間都要重寫一次履歷，耗時又累</li>
+            <li>Cover Letter 寫出來像罐頭，複製貼上看起來很假</li>
+            <li>自我介紹到面試前夕還不知道要說什麼</li>
+          </ul>
+        </div>
+        <div class="os-flow">
+          <div class="jpf-wrap">
+            <div class="jpf-node jpf-tool">
+              <div class="jpf-tag">AI 教練</div>
+              <div class="jpf-name">客製化履歷教練</div>
+              <span class="jpf-source">讀取：作品集資料庫 + 職缺深度分析</span>
+              <div class="jpf-desc">批次產出每個職缺的客製化版本</div>
+            </div>
+            <div class="jpf-arr gold"></div>
+            <div class="jpf-node jpf-output">
+              <div class="jpf-tag">產出</div>
+              <div class="jpf-name">9 份客製化履歷</div>
+              <div class="jpf-desc">一職缺一份，精準對齊每個 JD</div>
+            </div>
+            <div class="jpf-arr"></div>
+            <div class="jpf-node jpf-tool">
+              <div class="jpf-tag">AI 教練</div>
+              <div class="jpf-name">Cover Letter 教練</div>
+              <div class="jpf-desc">接續撰寫，每封都不是罐頭</div>
+            </div>
+            <div class="jpf-arr gold"></div>
+            <div class="jpf-node jpf-output">
+              <div class="jpf-tag">產出</div>
+              <div class="jpf-name">求職信 + 自我介紹稿</div>
+              <div class="jpf-desc">30 秒 / 90 秒 / 3 分鐘三個版本</div>
+            </div>
+            <div class="jpf-arr"></div>
+            <div class="jpf-node jpf-db">
+              <div class="jpf-tag">寫入資料庫</div>
+              <div class="jpf-name">求職材料庫</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-connector"></div>
+
+      <!-- Step 4: Rehearse -->
+      <div class="offer-step" onclick="selectStep(4)">
+        <div class="os-left">
+          <div class="os-badge">R</div>
+          <div class="os-label">
+            <div class="os-en">Rehearse</div>
+            <div class="os-zh">演練上場</div>
+          </div>
+        </div>
+        <div class="os-pain">
+          <div class="os-pain-label">你可能遇到的困境</div>
+          <ul>
+            <li>面試前準備很多，上場還是緊張、腦袋空白</li>
+            <li>被追問就開始語無倫次，不知道怎麼拉回來</li>
+            <li>面試結束不知道哪裡答得好、哪裡出問題</li>
+          </ul>
+        </div>
+        <div class="os-flow">
+          <div class="jpf-wrap">
+            <div class="jpf-node jpf-tool">
+              <div class="jpf-tag">AI 教練</div>
+              <div class="jpf-name">面試簡報教練</div>
+              <span class="jpf-source">讀取：作品集資料庫 + 職缺深度分析 + 求職材料庫</span>
+              <div class="jpf-desc">把所有素材整合成面試官愛看的結構</div>
+            </div>
+            <div class="jpf-arr gold"></div>
+            <div class="jpf-node jpf-output">
+              <div class="jpf-tag">產出</div>
+              <div class="jpf-name">面試簡報（6–8 頁）</div>
+              <div class="jpf-desc">把你的故事整理成面試官愛看的結構</div>
+            </div>
+            <div class="jpf-arr"></div>
+            <div class="jpf-node jpf-tool">
+              <div class="jpf-tag">練習</div>
+              <div class="jpf-name">模擬面試</div>
+              <div class="jpf-desc">追問演練 + 回饋修正，練到接得住每個追問</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.offer-flow -->
+
+    <div class="journey-quote">「你不只完成一次求職，而是學會一套未來求職都可以一直用的方法。」</div>
+  </div>
+</section>
+
+<!-- AI SYSTEM SECTION -->
+<section class="ai-system-section">
+  <div class="container fade">
+    <div class="sec-label">Career OS</div>
+    <h2 class="sec-title">AI 求職一條龍系統<br><em>同一份資料庫，串起所有 AI 教練</em></h2>
+    <div class="bar bar-gold"></div>
+
+    <div class="ais-layout">
+      <!-- Left: data inputs -->
+      <div>
+        <div class="ais-col-label"><span class="ais-section-num">①</span>整合你的求職資料</div>
+        <div class="ais-input-list">
+          <div class="ais-input-item">個人履歷 / 經歷</div>
+          <div class="ais-input-item">作品集 / 專案</div>
+          <div class="ais-input-item">學經歷 / 證照</div>
+          <div class="ais-input-item">求職目標 / 職缺</div>
+          <div class="ais-input-item">面試紀錄 / 回饋</div>
+        </div>
+      </div>
+
+      <!-- Center: Career OS -->
+      <div class="ais-center">
+        <div class="ais-db">
+          <div class="ais-db-title">Career OS<br>求職系統</div>
+          <div class="ais-db-sub">同一份資料庫</div>
+        </div>
+        <div class="ais-db-note">一次建檔，<br>所有 AI 教練都懂你</div>
+      </div>
+
+      <!-- Right: AI coaches -->
+      <div>
+        <div class="ais-col-label"><span class="ais-section-num">②</span>AI 教練團，陪你每一步</div>
+        <div class="ais-coach-list">
+          <div class="ais-coach-item">
+            <div class="ais-coach-name">整理經歷</div>
+            <div class="ais-coach-sub">問題解決履歷教練 · AI 幫你提煉亮點</div>
+          </div>
+          <div class="ais-coach-item">
+            <div class="ais-coach-name">找到方向</div>
+            <div class="ais-coach-sub">天職分析教練 · AI 幫你釐清方向</div>
+          </div>
+          <div class="ais-coach-item">
+            <div class="ais-coach-name">表達自己</div>
+            <div class="ais-coach-sub">履歷 / 自我介紹教練 · AI 幫你寫出好內容</div>
+          </div>
+          <div class="ais-coach-item">
+            <div class="ais-coach-name">模擬面試</div>
+            <div class="ais-coach-sub">面試簡報教練 · AI 幫你練到上場穩</div>
+          </div>
+          <div class="ais-coach-item">
+            <div class="ais-coach-name">隨時陪伴</div>
+            <div class="ais-coach-sub">Coffee Chat 教練 · 聊一聊，給你建議與鼓勵</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="ais-pipeline-wrap">
+      <div class="ais-pipeline-label"><span class="ais-section-num">③</span>更快找到理想工作</div>
+      <div class="ais-pipeline">
+        <div class="ais-pipe-step">精準準備</div>
+        <div class="ais-pipe-arr" aria-hidden="true">→</div>
+        <div class="ais-pipe-step">對焦職缺</div>
+        <div class="ais-pipe-arr" aria-hidden="true">→</div>
+        <div class="ais-pipe-step">自信面試</div>
+        <div class="ais-pipe-arr" aria-hidden="true">→</div>
+        <div class="ais-pipe-step ais-pipe-offer">拿到 Offer！</div>
+      </div>
+    </div>
+
+    <div class="ais-cta">AI 助你脫穎而出，拿到第一份 <em>offer</em>！</div>
+  </div>
+</section>
+
+<!-- COURSE OVERVIEW -->
+<section class="system-section">
+  <div class="container fade">
+    <div class="sec-label">課程包含什麼</div>
+    <h2 class="sec-title">這門課不只是一堂課<br><em>而是一套完整求職系統</em></h2>
+    <div class="bar"></div>
+    <p class="sec-desc">你不需要再自己東拼西湊求職資料。這次，從「不知道自己有什麼」一路走到「準備好面試上場」，每一步都有人陪。</p>
+    <div class="course-boxes">
+      <div class="course-box">
+        <div class="course-box-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><circle cx="9" cy="14" r="1" fill="var(--navy)"/><circle cx="15" cy="14" r="1" fill="var(--navy)"/><path d="M8 18h8"/></svg>
+        </div>
+        <div>
+          <h4>7 大 AI 教練</h4>
+          <p>你的貼身求職助手，從整理作品集到面試簡報，每步都有 AI 陪</p>
+        </div>
+      </div>
+      <div class="course-box">
+        <div class="course-box-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div>
+          <h4>1 套完整求職系統</h4>
+          <p>作品集、職缺、履歷、面試紀錄全整合在一個 Notion 系統</p>
+        </div>
+      </div>
+      <div class="course-box">
+        <div class="course-box-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div>
+          <h4>8 份教材文檔</h4>
+          <p>不只給模板，帶你理解每一步背後的判斷邏輯</p>
+        </div>
+      </div>
+      <div class="course-box">
+        <div class="course-box-icon">
+          <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div>
+          <h4>3 場直播討論</h4>
+          <p>每個階段都有直播，陪你處理作品集、履歷、面試的真實卡關</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="compare-section">
+  <div class="container fade">
+    <div class="sec-label">為什麼不直接用 ChatGPT？</div>
+    <h2 class="sec-title" style="color:white;">自己用 vs. <em>這套 Career OS</em></h2>
+    <div class="bar bar-gold"></div>
+    <div class="compare-grid">
+      <div class="compare-col old">
+        <div class="compare-col-head">自己用 ChatGPT</div>
+        <div class="compare-rows">
+          <div class="compare-row"><span class="row-label">每次用的資料</span>每次都要重新貼你的經歷，重頭來過</div>
+          <div class="compare-row"><span class="row-label">多任務切換</span>作品集、履歷、Cover Letter、面試各開一個視窗，跳來跳去思路就斷了</div>
+          <div class="compare-row"><span class="row-label">面試回饋</span>上次面試的回饋找不回，無法累積</div>
+          <div class="compare-row"><span class="row-label">Prompt 問題</span>不知道怎麼問才能得到好的答案</div>
+        </div>
+      </div>
+      <div class="compare-col new">
+        <div class="compare-col-head">👑 這套 Career OS</div>
+        <div class="compare-rows">
+          <div class="compare-row"><span class="row-label">每次用的資料</span>碎片資料整合到資料庫，<strong>7 大 AI 教練全部共用同一份</strong></div>
+          <div class="compare-row"><span class="row-label">多任務切換</span>職缺分析、客製履歷、Cover Letter、面試簡報，<strong>全部可以重複用</strong></div>
+          <div class="compare-row"><span class="row-label">面試回饋</span><strong>每次面試自動存進《面試紀錄資料庫》</strong>，努力才會累積</div>
+          <div class="compare-row"><span class="row-label">Prompt 問題</span><strong>教練幫你問對問題</strong>，你只需要回答就好</div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:14px;color:rgba(255,255,255,.45);text-align:center;">真正省力的不是 AI，而是你的資料不用再搬來搬去——你的努力才會累積起來。</p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="container fade">
+    <div class="sec-label">你會經歷的旅程</div>
+    <h2 class="sec-title">從現在到<em>拿到 Offer</em></h2>
+    <div class="bar"></div>
+
+    <div class="flow-chart">
+
+      <div class="flow-box b-navy">
+        <div class="flow-hd"><h4>跟耀陞 1 on 1 諮詢（免費）</h4></div>
+        <p>了解課程 + 系統 + 方法論 + 收費機制</p>
+        <div class="flow-expand"><div class="flow-expand-inner"><ul>
+          <li>不確定自己是否適合這個陪跑？免費聊一次再決定</li>
+          <li>耀陞會誠實告訴你適不適合，不會推銷</li>
+          <li>曾拒絕 10 位以上學生進入課程</li>
+        </ul></div></div>
+      </div>
+      <div class="flow-arr"></div>
+
+      <div class="flow-box b-gold">
+        <div class="flow-hd"><h4>報名 Lv 1｜系統建立版</h4></div>
+        <p>3 週直播 + 系統 + AI 教練 · 5/30 開課</p>
+      </div>
+      <div class="flow-arr"></div>
+
+      <div class="flow-row">
+        <div class="flow-box b-outline">
+          <div class="flow-hd"><h4>W1</h4></div>
+          <p>自我探索<br>&amp; 作品集整理</p>
+          <div class="flow-expand"><div class="flow-expand-inner">
+            <div class="fl-date">5/30–6/5 ／ 直播 6/5（五）19:00–21:00</div>
+            <ul><li>五問引導法拆解每段經歷</li><li>生涯三力分析</li><li>產出作品集資料庫</li></ul>
+          </div></div>
+        </div>
+        <div class="flow-box b-outline">
+          <div class="flow-hd"><h4>W2</h4></div>
+          <p>天職分析<br>&amp; 職缺分析</p>
+          <div class="flow-expand"><div class="flow-expand-inner">
+            <div class="fl-date">6/6–6/12 ／ 直播 6/12（五）19:00–21:00</div>
+            <ul><li>IKIGAI 天職公式整合</li><li>3 個職涯方向 + 9 個目標職缺</li><li>深度拆解 JD 關鍵字</li></ul>
+          </div></div>
+        </div>
+        <div class="flow-box b-outline">
+          <div class="flow-hd"><h4>W3</h4></div>
+          <p>客製化履歷<br>&amp; 面試溝通</p>
+          <div class="flow-expand"><div class="flow-expand-inner">
+            <div class="fl-date">6/13–6/19 ／ 直播 6/19（五）19:00–21:00</div>
+            <ul><li>客製化履歷 + Cover Letter</li><li>30 秒 / 90 秒自介腳本</li><li>面試簡報規劃</li></ul>
+          </div></div>
+        </div>
+      </div>
+      <div class="flow-arr"></div>
+
+      <div class="flow-box b-navy">
+        <div class="flow-hd"><h4>W4 材料完成週</h4></div>
+        <p>客製化履歷 + Cover Letter + 作品集</p>
+        <div class="flow-expand"><div class="flow-expand-inner"><ul>
+          <li>6/20–7/3 自主完成全部求職材料</li>
+          <li>指定 5 家公司博覽會作戰計畫</li>
+          <li>模擬追問 Q&amp;A 演練</li>
+        </ul></div></div>
+      </div>
+      <div class="flow-arr"></div>
+
+      <div class="flow-box b-gold">
+        <div class="flow-hd"><h4 style="display:flex;align-items:center;gap:7px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="var(--navy)" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>W5｜7/4 104 職涯博覽會實戰</h4></div>
+        <p>台北世貿一館 · 投遞 ≥5 份、對談 ≥3 位 HR</p>
+        <div class="flow-expand"><div class="flow-expand-inner"><ul>
+          <li>7/4（六）09:30–17:00，台北世貿一館 B 區</li>
+          <li>300+ 企業現場參展</li>
+          <li>Lv 2 篩選資格從此起算</li>
+        </ul></div></div>
+      </div>
+      <div class="flow-arr"></div>
+
+      <div class="flow-box b-navy">
+        <div class="flow-hd"><h4>W6｜Lv 2 入場面試</h4></div>
+        <p>30–60 分鐘 1 on 1 篩選（耀陞親面）</p>
+        <div class="flow-expand"><div class="flow-expand-inner"><ul>
+          <li>須完成 Lv 1 全部求職材料</li>
+          <li>博覽會親自到場 + 投遞 ≥ 3 家</li>
+          <li>通過後方進入深度陪跑期</li>
+        </ul></div></div>
+      </div>
+      <div class="flow-arr"></div>
+
+      <div class="flow-box b-gold">
+        <div class="flow-hd"><h4>升級 Lv 2｜深度陪跑版</h4></div>
+      </div>
+      <div class="flow-arr"></div>
+
+      <div class="flow-row">
+        <div class="flow-box b-outline">
+          <div class="flow-hd"><h4>W7–18 衝刺期</h4></div>
+          <p>雙週 1 on 1（共 6 次）</p>
+          <div class="flow-expand"><div class="flow-expand-inner"><ul>
+            <li>履歷健檢逐字打磨</li><li>模擬面試 + 面後檢討</li><li>心態支持</li>
+          </ul></div></div>
+        </div>
+        <div class="flow-box b-outline">
+          <div class="flow-hd"><h4>W19–30 延長期</h4></div>
+          <p>月度 1 on 1（共 3 次）</p>
+          <div class="flow-expand"><div class="flow-expand-inner"><ul>
+            <li>策略調整：轉換職缺類型</li><li>Coffee Chat 人脈擴充</li><li>心理能量重建</li>
+          </ul></div></div>
+        </div>
+      </div>
+      <div class="flow-arr"></div>
+
+      <div class="flow-final">
+        <h4 style="display:flex;align-items:center;justify-content:center;gap:10px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+          拿到第一份 Offer！
+        </h4>
+      </div>
+
+      <p class="flow-note">6 個月內未就業 → 陪跑費全免</p>
+    </div>
+  </div>
+</section>
+
+<!-- COACH (merged instructor + 20% human) -->
+<section class="coach-section">
+  <div class="container fade">
+    <div class="sec-label">你的陪跑教練</div>
+    <h2 class="sec-title">系統做到 <em>80%</em><br>剩下的 <em>20%</em>，我會在</h2>
+    <div class="bar"></div>
+    <div class="coach-card">
+      <div class="coach-photo-side">
+        <div class="coach-photo-frame">
+          <img src="jerry-photo.png" alt="邱耀陞 Jerry">
+        </div>
+        <div class="coach-nameplate">
+          <h3>邱耀陞 Jerry</h3>
+          <p>生涯教練 ／ 重啟人生計劃 創辦人</p>
+        </div>
+      </div>
+      <div class="coach-content">
+        <div class="coach-human-label">系統做不到的那 20%，我會親自陪你</div>
+        <div class="coach-human-items">
+          <div class="chi">
+            <div class="chi-dot"></div>
+            <div>
+              <h5>履歷健檢</h5>
+              <p>我會把 AI 沒抓到、HR 卻會被卡到的細節幫你指出來</p>
+            </div>
+          </div>
+          <div class="chi">
+            <div class="chi-dot"></div>
+            <div>
+              <h5>模擬面試</h5>
+              <p>陪你練到面試官的追問你都接得住、答得出來</p>
+            </div>
+          </div>
+          <div class="chi">
+            <div class="chi-dot"></div>
+            <div>
+              <h5>心理支持</h5>
+              <p>海投沒回音的疲憊、「我是不是真的不行」的懷疑——這些不是「再寫一份履歷」可以解的，你需要有人聽你說，然後陪你下決定。</p>
+            </div>
+          </div>
+        </div>
+        <div class="coach-divider"></div>
+        <div class="coach-stats-label">相關背景</div>
+        <div class="coach-stats">
+          <div class="coach-stat">
+            <div class="coach-stat-num" data-target="200" data-suffix="+">200+</div>
+            <div class="coach-stat-label">次 1 on 1<br>生涯諮詢</div>
+          </div>
+          <div class="coach-stat">
+            <div class="coach-stat-num" data-target="30" data-suffix="+">30+</div>
+            <div class="coach-stat-label">位學生成功<br>轉職 / 找到第一份工作</div>
+          </div>
+          <div class="coach-stat">
+            <div class="coach-stat-num" data-target="50" data-suffix="+">50+</div>
+            <div class="coach-stat-label">場工作坊<br>履歷、面試、生涯探索</div>
+          </div>
+        </div>
+        <div class="coach-creds">
+          <div class="coach-cred"><span>問題解決人才媒合會</span>｜專案經理 / 履歷教練 / 講師</div>
+          <div class="coach-cred"><span>自主探索陪跑營</span>｜開發者 &amp; 講師（第 5 屆）</div>
+          <div class="coach-cred"><span>KPMG</span>｜數位轉型顧問實習</div>
+          <div class="coach-cred"><span>AndAction</span>｜教練認證</div>
+        </div>
+        <div class="coach-quote">「我會用「探索 → 定位 → 產出 → 出擊」的節奏，帶你把第一份 offer 做成結果。3 個月內，我不只給你工具，我會用我所有走過的經驗陪你，直到你拿到第一份 offer。」</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY BAR -->
+<div class="urgency-bar">
+  報名截止 5/30（六）｜Lv 1 剩 8 席，Lv 2 剩 5 席<span>過期後課程進入候補</span>
+</div>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="container fade">
+    <div class="sec-label">選一個適合你的方式加入</div>
+    <h2 class="sec-title">方案選擇</h2>
+    <div class="bar"></div>
+    <p class="pricing-note">大部分人從 Lv 1 開始，需要更深度陪跑、要拿到 offer 的人再升級 Lv 2。曾參與付費課程 / 活動可再優惠 <strong>NT$ 300</strong>。</p>
+    <div class="pricing-grid">
+      <div class="price-card basic">
+        <div class="price-tier">LV 1</div>
+        <div class="price-name">系統建立版</div>
+        <div class="price-for">3 週直播 + 系統 + AI 教練<br>適合有自律能力的人</div>
+        <div class="price-amount">NT$ 2,500</div>
+        <div class="price-sub">一次性費用</div>
+        <div class="price-hr"></div>
+        <ul class="price-list">
+          <li><div class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>自我探索 + 職涯定位</span></li>
+          <li><div class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>6 大求職材料產出</span></li>
+          <li><div class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>7 大 AI 教練免費使用（第 1 個月）</span></li>
+          <li><div class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>7/4 104 博覽會實戰參加資格</span></li>
+        </ul>
+        <div class="price-limit">限 8 人</div>
+        <a class="price-cta" href="#consult">立即報名 Lv 1</a>
+      </div>
+      <div class="price-card premium">
+        <div class="price-tier">LV 2 · 推薦</div>
+        <div class="price-name">深度陪跑版</div>
+        <div class="price-for">給「3 個月內想拿到 offer」的人</div>
+        <div class="price-amount">入營費免費</div>
+        <div class="price-sub">找到工作後再付費</div>
+        <div class="price-hr"></div>
+        <ul class="price-list">
+          <li><div class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>Lv 1 全部內容</span></li>
+          <li><div class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong style="color:var(--gold)">9 次 1 on 1</strong>（前 3 月雙週 6 次 + 後 3 月月度 3 次）</span></li>
+          <li><div class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>履歷健檢｜模擬面試｜面試簡報打磨</span></li>
+          <li><div class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span>全程 7 大 AI 教練 + 創辦人手把手</span></li>
+        </ul>
+        <div class="fee-box">
+          <h5>收費結構</h5>
+          <div class="fee-row">3 個月內就業 → 月薪 × 15% × 4 月<br><small style="color:rgba(255,255,255,.4);">（約 NT$ 24,000）</small></div>
+          <div class="fee-row">4–6 個月就業 → 月薪 × 10% × 4 月<br><small style="color:rgba(255,255,255,.4);">（約 NT$ 16,000）</small></div>
+          <div class="fee-row">6 個月內未就業 → <strong>全免費</strong></div>
+        </div>
+        <div class="price-limit">限 5 人｜需通過 1 on 1 面試</div>
+        <a class="price-cta" href="#consult">申請 Lv 2 面試資格</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMISES -->
+<section class="promise-section">
+  <div class="container fade">
+    <div class="sec-label">我們的承諾</div>
+    <h2 class="sec-title">你成功，<em>才是我的成功</em></h2>
+    <div class="bar"></div>
+    <div class="promise-grid">
+      <div class="promise-card">
+        <div class="promise-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h4>入場前先篩選</h4>
+        <p>Lv 2 需通過 1 on 1 面試，確保你是來真的。我曾拒絕過 10+ 位學生。</p>
+      </div>
+      <div class="promise-card">
+        <div class="promise-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>找不到工作就全免</h4>
+        <p>6 個月內未就業，陪跑費全免。你的成功才是我的成功。</p>
+      </div>
+      <div class="promise-card">
+        <div class="promise-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+        <h4>AI 第 1 個月免費</h4>
+        <p>後續系統使用 850 元/月，可代墊至就業後再付。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who-section">
+  <div class="container fade">
+    <div class="sec-label">這個陪跑適合你嗎？</div>
+    <h2 class="sec-title">適合有行動意願<br><em>但還沒找到方法的你</em></h2>
+    <div class="bar"></div>
+    <div class="who-split">
+      <div class="who-col no">
+        <h4>不適合這個人</h4>
+        <ul>
+          <li>已有完整求職能力</li>
+          <li>還沒準備好開始投履歷</li>
+          <li>只想被告知「投哪間」</li>
+        </ul>
+      </div>
+      <div class="who-col yes">
+        <h4>就是為你打造的</h4>
+        <ul>
+          <li>應屆畢業生 / 工作經驗 &lt; 2 年 / 想轉職</li>
+          <li>想學系統化求職方法</li>
+          <li>準備在 3–6 個月內就業</li>
+          <li>願意自己探索 + 主動出擊</li>
+        </ul>
+      </div>
+    </div>
+    <div class="who-note">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      不確定自己適不適合？先預約免費諮詢，我不會推銷你，聊完再判斷。
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container fade">
+    <div class="sec-label">學員見證</div>
+    <h2 class="sec-title">真實的<em>陪跑成果</em></h2>
+    <div class="bar"></div>
+    <div class="featured-t">
+      <div class="ft-avatar"><img src="testimonial-chen.png" alt="陳琦雯"></div>
+      <div>
+        <div class="ft-name">陳琦雯</div>
+        <div class="ft-bg">銘傳企管系（非頂大、非數據相關科系）</div>
+        <div class="ft-quote">「超級感謝這一路上有耀陞的陪跑，陪著我一起面對迷茫和害怕，也讓我學到判斷問題的技巧，增進思考力！」</div>
+        <div class="ft-result">成果：拿到宏盟媒體 OMG 數據分析實習 → 實習一個月就拿到留任肯定 → 成功轉正</div>
+      </div>
+    </div>
+    <div class="t-grid">
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar">蕭</div>
+          <div><div class="t-name">蕭O庭</div><div class="t-school">國立台灣戲曲學院</div></div>
+          <div class="t-stars" aria-label="5 顆星">★★★★★</div>
+        </div>
+        <div class="t-body">「整理的內容很完整，講的內容也有深度，值得讓人回家思考。今天突破了原本既定的舒適圈，是一個不錯的體驗。」</div>
+        <span class="t-tag">整體滿意度 5/5</span>
+      </div>
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar">黃</div>
+          <div><div class="t-name">黃O仁</div><div class="t-school">準備國考中</div></div>
+          <div class="t-stars" aria-label="5 顆星">★★★★★</div>
+        </div>
+        <div class="t-body">「運用 AI 進行客製化履歷真的很酷，以前完全不知道怎麼用 AI 幫我寫履歷。職缺分析那個環節超酷，以往要寫客製化履歷常常很困惑，這次學到很感謝！」</div>
+        <span class="t-tag">整體滿意度 5/5</span>
+      </div>
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar">林</div>
+          <div><div class="t-name">林O佑</div><div class="t-school">北市大地生系</div></div>
+          <div class="t-stars" aria-label="5 顆星">★★★★★</div>
+        </div>
+        <div class="t-body">「本來以為自己做過的循環餐具專案太小，但經過 AI 分析發現還是可以看出滿多我的能力和特質。這場工作坊讓我在職涯方面更有自信了！」</div>
+        <span class="t-tag">整體滿意度 5/5</span>
+      </div>
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar">黃</div>
+          <div><div class="t-name">黃O恩</div><div class="t-school">國立高雄大學資管系</div></div>
+          <div class="t-stars" aria-label="4 顆星">★★★★</div>
+        </div>
+        <div class="t-body">「『海投履歷＝跟全班告白、客製化履歷＝專屬情書』這個比喻被逗笑了 XD。找工作要考量自己的價值觀，這個觀念讓我收穫很深！」</div>
+        <span class="t-tag">整體滿意度 4/5</span>
+      </div>
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar">莊</div>
+          <div><div class="t-name">莊O霓</div><div class="t-school">台北大學金融系</div></div>
+          <div class="t-stars" aria-label="4 顆星">★★★★</div>
+        </div>
+        <div class="t-body">「謝謝你分享企劃和實際執行方案，挺發人省思，推進了我後續職涯發展的行動力與動機。寫履歷有困擾的話，來這場工作坊就對了！」</div>
+        <span class="t-tag">講師滿意度 5/5</span>
+      </div>
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar">黃</div>
+          <div><div class="t-name">黃O涵</div><div class="t-school">師大東亞系</div></div>
+          <div class="t-stars" aria-label="5 顆星">★★★★★</div>
+        </div>
+        <div class="t-body">「可以用不一樣的方式履歷健檢，收穫到很多不一樣的新觀點。了解到怎麼投履歷，不只是找到工作，而是找到適合自己的工作。」</div>
+        <span class="t-tag">整體滿意度 5/5</span>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:13px;color:var(--gray-text);text-align:center;">＊以上回饋摘錄自過往履歷工作坊學員真實留言。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container fade">
+    <div class="sec-label">常見問題</div>
+    <h2 class="sec-title">你可能想問的</h2>
+    <div class="bar"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>我不確定要找什麼工作，可以嗎？</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">完全可以！Lv 1 第二週的天職分析就是處理這件事。不需要先有答案才能來，來了就能幫你找到答案。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>我以前也上過求職課，都沒拿到 offer。</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">這不是又一堂履歷課。我們有完整求職系統、雙週 1on1 跟進度、以及 7/4 博覽會實戰，讓你不是只學概念，而是真的投履歷、真的面試、真的拿到 offer。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>Lv 1 上完一定要進 Lv 2 嗎？</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">不一定。Lv 1 是獨立產品（系統 + 模板 + AI 教練），沒升級也是完整的。Lv 2 是給「需要人陪 + 成果保證」的人。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>Lv 2「找到工作」是怎麼定義的？</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">獲得正職、實習或約聘 offer 並正式報到，以報到日為起算日。不分產業、不限地區（含遠端）、無薪資門檻。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>如果我中途消失會怎樣？</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">違約金 10,000 元 + 終止合約。如果隱瞞就業，補繳全額陪跑費 + 違約金。請在簽約前評估好自己是不是真的要陪跑——Lv 2 不是給「試試看」的人。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>退費政策？</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">6/5 招生截止前：全額退費。6/6 開課後 1 週內：扣除 20% 行政費用。開課 1 週後：恕不退費（但仍可使用全部教材）。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>5/30 開課前需要先準備什麼？</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">5/30 會發給你完整系統與教材，讓你馬上可以開始操作。第一週的目標是在 6/5 直播前完成 3 份作品集——跟著 AI 教練一起整理，認真做的話一個案例大約 1.5–2 小時，3 份合計 5–6 小時左右。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>三場直播沒辦法全部參加，可以嗎？</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">可以。直播時間點是輔助你推進進度用的，不是死的 deadline。每場直播都會有錄影，可以事後回放。如果只能參加第二、三週的直播，補一下第一週的破冰影片即可，影響不大。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>7/4 就業博覽會如果沒辦法去怎麼辦？</span><div class="faq-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="faq-a"><div class="faq-a-inner">博覽會對 Lv 1 學員沒有強制要求，不去也可以完整完成課程內容。博覽會只是 Lv 2 深度陪跑的篩選起點之一，如果你有計畫升級 Lv 2 但確定無法出席，歡迎提前跟耀陞說，再另行討論替代方式。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section" id="consult">
+  <div class="container">
+    <span class="sec-label">免費聊聊你的求職卡點</span>
+    <h2 class="sec-title">不需要更多求職技巧<br>你需要的是有人<em>陪你拿到 offer</em></h2>
+    <div class="bar bar-gold"></div>
+    <p class="sec-desc">報名前可以先跟耀陞進行一次免費的生涯諮詢。就算最後不報名，你也會帶走一份更清楚的下一步行動建議。我不會推銷你，我曾拒絕過 10 位以上的學生。</p>
+    <div class="cta-btns">
+      <a class="btn-gold" href="https://www.notion.so/eb4a76e418764c7a92f74552cf5d2dab" target="_blank" rel="noopener">預約免費諮詢</a>
+      <a class="btn-outline" href="https://www.notion.so/367fc5279b8f8144add5d9bf072ef38c" target="_blank" rel="noopener">直接報名 Lv 1</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span class="fl-r">RESET</span><span class="fl-s">STUDIO</span></div>
+  <p>reset your life, enrich your life</p>
+</footer>
+
+<script>
+  // Fade in on scroll
+  const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in'); }), { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => io.observe(el));
+
+  // Stat count-up animation
+  function animateCount(el, target, suffix) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = target + suffix; return; }
+    let start = 0; const dur = 1200; const step = 16;
+    const inc = target / (dur / step);
+    const tick = () => {
+      start = Math.min(start + inc, target);
+      el.textContent = Math.round(start) + suffix;
+      if (start < target) requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  const statIo = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const nums = entry.target.querySelectorAll('.coach-stat-num[data-target]');
+      nums.forEach(n => animateCount(n, +n.dataset.target, n.dataset.suffix || ''));
+      statIo.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+  const statsEl = document.querySelector('.coach-stats');
+  if (statsEl) statIo.observe(statsEl);
+
+  // Journey dock
+  function selectStep(i) {
+    document.querySelectorAll('.offer-step').forEach((s, idx) => s.classList.toggle('active', idx === i));
+  }
+
+  // FAQ accordion
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      el.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // FAQ a11y init
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.setAttribute('role', 'button');
+    q.setAttribute('tabindex', '0');
+    q.setAttribute('aria-expanded', 'false');
+    q.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(q); }
+    });
+  });
+</script>
+</body>
+</html>
