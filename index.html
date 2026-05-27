@@ -759,7 +759,7 @@
     <div class="sec-label">OFFER 五步驟</div>
     <h2 class="sec-title">一次打包帶走<br><em>完整求職旅程成果</em></h2>
     <div class="bar bar-gold"></div>
-    <p class="sec-desc">點擊每個步驟，看 AI 教練如何幫你把問題解掉。</p>
+    <p class="sec-desc">向下滾動，看 AI 教練如何一步步幫你把問題解掉。</p>
 
     <div class="offer-flow">
 
@@ -1629,10 +1629,30 @@
   const statsEl = document.querySelector('.coach-stats');
   if (statsEl) statIo.observe(statsEl);
 
-  // Journey dock
+  // Offer step activation
   function selectStep(i) {
     document.querySelectorAll('.offer-step').forEach((s, idx) => s.classList.toggle('active', idx === i));
   }
+
+  // Scroll-triggered offer step
+  function updateActiveOfferStep() {
+    const steps = document.querySelectorAll('.offer-step');
+    const flow = document.querySelector('.offer-flow');
+    if (!flow || !steps.length) return;
+    const flowRect = flow.getBoundingClientRect();
+    if (flowRect.bottom < 0 || flowRect.top > window.innerHeight) return;
+    const trigger = window.innerHeight * 0.42;
+    let closest = 0, closestDist = Infinity;
+    steps.forEach((s, i) => {
+      const r = s.getBoundingClientRect();
+      const dist = Math.abs((r.top + r.height / 2) - trigger);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    selectStep(closest);
+  }
+
+  window.addEventListener('scroll', updateActiveOfferStep, { passive: true });
+  updateActiveOfferStep();
 
   // FAQ accordion
   function toggleFaq(el) {
