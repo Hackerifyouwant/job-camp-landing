@@ -137,11 +137,8 @@
       padding: 5px 0;
       cursor: pointer;
       position: relative; z-index: 1;
-      transition: opacity .7s cubic-bezier(.4,0,.2,1), padding .7s cubic-bezier(.4,0,.2,1);
+      will-change: opacity, padding;
     }
-    .offer-step:not(.active) { opacity: 0.22; padding: 5px 0; }
-    .offer-step.active { opacity: 1; padding: 20px 0; }
-    .offer-step:hover:not(.active) { opacity: 0.42; }
 
     /* Step connector between rows */
     .offer-connector { min-height: 20px; position: relative; z-index: 1; }
@@ -153,25 +150,24 @@
       background: var(--navy-deep); border: 2px solid rgba(255,255,255,.2);
       display: flex; align-items: center; justify-content: center;
       font-size: 18px; font-weight: 900; color: rgba(255,255,255,.45);
-      transition: all .7s cubic-bezier(.4,0,.2,1);
+      transition: background-color .5s ease, border-color .5s ease, color .5s ease, box-shadow .5s ease;
+      will-change: transform;
     }
     .offer-step.active .os-badge {
       background: var(--gold); border-color: var(--gold); color: var(--navy);
       box-shadow: 0 0 0 7px rgba(245,166,35,.15);
     }
     .os-label { padding-top: 10px; }
-    .os-en { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; transition: color .7s cubic-bezier(.4,0,.2,1); }
-    .os-zh { font-size: 15px; font-weight: 800; color: rgba(255,255,255,.65); line-height: 1.3; transition: color .7s cubic-bezier(.4,0,.2,1); }
+    .os-en { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; transition: color .5s ease; }
+    .os-zh { font-size: 15px; font-weight: 800; color: rgba(255,255,255,.65); line-height: 1.3; transition: color .5s ease; }
     .offer-step.active .os-en { color: var(--gold); }
     .offer-step.active .os-zh { color: var(--white); }
 
     /* Middle: pain points — collapse when inactive */
     .os-pain {
       max-height: 0; overflow: hidden; opacity: 0;
-      transition: max-height .7s cubic-bezier(.4,0,.2,1), opacity .6s ease;
       padding-top: 2px;
     }
-    .offer-step.active .os-pain { max-height: 280px; opacity: 1; }
     .os-pain-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.32); margin-bottom: 10px; }
     .os-pain ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .os-pain li { font-size: 13px; color: rgba(255,255,255,.72); line-height: 1.65; padding-left: 16px; position: relative; }
@@ -186,7 +182,7 @@
     .offer-step.active .os-flow .jpf-node { padding: 14px 18px; }
     .offer-step.active .os-flow .jpf-name { font-size: 15px; }
     .offer-step.active .os-flow .jpf-desc { font-size: 13px; }
-    .os-flow .jpf-node, .os-flow .jpf-arr { transition: padding .4s ease, font-size .4s ease; }
+    .os-flow .jpf-node, .os-flow .jpf-arr { transition: none; }
     .os-flow .jpf-split { align-items: stretch; }
 
     @media (max-width: 700px) {
@@ -1629,36 +1625,72 @@
   const statsEl = document.querySelector('.coach-stats');
   if (statsEl) statIo.observe(statsEl);
 
-  // Offer step activation
+  // Offer step — click fallback
   function selectStep(i) {
     document.querySelectorAll('.offer-step').forEach((s, idx) => s.classList.toggle('active', idx === i));
   }
 
-  // Scroll-triggered offer step
-  function updateActiveOfferStep() {
-    const steps = document.querySelectorAll('.offer-step');
-    const flow = document.querySelector('.offer-flow');
+  // Scroll-driven proportional animation
+  (function () {
+    const steps = Array.from(document.querySelectorAll('.offer-step'));
+    const flow  = document.querySelector('.offer-flow');
     if (!flow || !steps.length) return;
-    const flowRect = flow.getBoundingClientRect();
-    if (flowRect.bottom < 0 || flowRect.top > window.innerHeight) return;
-    const trigger = window.innerHeight * 0.42;
-    let closest = 0, closestDist = Infinity;
-    steps.forEach((s, i) => {
-      const r = s.getBoundingClientRect();
-      const dist = Math.abs((r.top + r.height / 2) - trigger);
-      if (dist < closestDist) { closestDist = dist; closest = i; }
-    });
-    selectStep(closest);
-  }
 
-  let offerTicking = false;
-  window.addEventListener('scroll', () => {
-    if (!offerTicking) {
-      requestAnimationFrame(() => { updateActiveOfferStep(); offerTicking = false; });
-      offerTicking = true;
+    function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+    function lerp(a, b, t)    { return a + (b - a) * t; }
+    function smooth(t)        { return t * t * (3 - 2 * t); } // smoothstep
+
+    function update() {
+      const fRect = flow.getBoundingClientRect();
+      if (fRect.bottom < -80 || fRect.top > window.innerHeight + 80) return;
+
+      const trigger  = window.innerHeight * 0.40; // 焦點位置（視窗 40% 高）
+      const halfZone = window.innerHeight * 0.30; // 影響範圍（±30% 視窗高）
+
+      let activeIdx = 0, maxT = -1;
+
+      steps.forEach((step, i) => {
+        const r = step.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const dist   = Math.abs(center - trigger);
+        const t      = smooth(clamp(1 - dist / halfZone, 0, 1));
+
+        // opacity: 0.15 → 1.0
+        step.style.opacity = lerp(0.15, 1, t).toFixed(3);
+
+        // padding: 4px → 24px（給大小感）
+        const pad = lerp(4, 24, t).toFixed(1);
+        step.style.paddingTop    = pad + 'px';
+        step.style.paddingBottom = pad + 'px';
+
+        // badge scale: 0.68 → 1.0
+        const badge = step.querySelector('.os-badge');
+        if (badge) badge.style.transform = `scale(${lerp(0.68, 1, t).toFixed(3)})`;
+
+        // pain section: max-height 0 → 300px, opacity 0 → 1
+        const pain = step.querySelector('.os-pain');
+        if (pain) {
+          pain.style.maxHeight = (t * 300).toFixed(0) + 'px';
+          pain.style.opacity   = clamp(t * 2.2 - 0.3, 0, 1).toFixed(3);
+        }
+
+        if (t > maxT) { maxT = t; activeIdx = i; }
+      });
+
+      // active class only drives badge color + text color (CSS handles these)
+      steps.forEach((s, i) => s.classList.toggle('active', i === activeIdx));
     }
-  }, { passive: true });
-  updateActiveOfferStep();
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => { update(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();
+  })();
 
   // FAQ accordion
   function toggleFaq(el) {
