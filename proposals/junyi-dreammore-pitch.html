@@ -82,9 +82,10 @@
 
   /* ===== HOOK 案例（愛因斯坦／賈伯斯） ===== */
   .talent-bg{background:#101720}
-  .talent-bg::before{content:"";position:absolute;inset:0;background:url("assets/einstein-jobs-talent-bg.png") center/cover no-repeat;opacity:.84}
+  .talent-bg::before{content:"";position:absolute;inset:0;background:url("assets/einstein-jobs-talent-bg.png") center 58%/cover no-repeat;opacity:.84}
   .talent-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,19,26,.34),rgba(14,19,26,.12) 42%,rgba(14,19,26,.76)),linear-gradient(90deg,rgba(14,19,26,.54),rgba(14,19,26,.20) 33%,rgba(14,19,26,.20) 67%,rgba(14,19,26,.54))}
   .talent-bg > *{position:relative;z-index:1}
+  .talent-bg .head,.talent-bg .body{transform:translateY(22px)}
   .cases2{display:grid;grid-template-columns:1fr 1fr;gap:28px;width:100%}
   .cases2 .case{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:38px 32px;text-align:center}
   .cases2 .case-name{font-size:var(--fs-h2);font-weight:700;color:var(--gold);margin-bottom:16px}
@@ -126,6 +127,7 @@
   .mx-list{list-style:none;margin:18px 0}
   .mx-list li{color:var(--ink-2);font-size:var(--fs-body);line-height:var(--lh-list);padding:6px 0 6px 18px;position:relative}
   .mx-list li::before{content:"–";position:absolute;left:0;color:var(--gold)}
+  .matrix.static .dot{opacity:1;transform:translate(-50%,50%) scale(1)}
 
   /* split2 (AI / 真人) */
   .split2{display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%}
@@ -137,8 +139,10 @@
   .split2 .box li::before{content:"–";position:absolute;left:0;color:var(--gold)}
   .split2 .box li.dim{opacity:.3}
   .split2 .box li.active{color:var(--ink);font-weight:700}
-  .split2-note{grid-column:1/-1;background:linear-gradient(165deg,rgba(224,162,60,.14),rgba(224,162,60,.04));border:1px solid var(--line);border-radius:16px;padding:18px 26px;color:var(--ink-2);font-size:var(--fs-body);line-height:var(--lh-body)}
-  .split2-note b{color:var(--gold);font-weight:800}
+  .split2-notes{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .split2-note-card{background:linear-gradient(165deg,rgba(224,162,60,.14),rgba(224,162,60,.04));border:1px solid var(--line);border-radius:16px;padding:18px 22px;color:var(--ink-2);font-size:var(--fs-body);line-height:var(--lh-body);opacity:.22;transition:opacity .35s ease,border-color .35s ease,box-shadow .35s ease}
+  .split2-note-card b{display:block;color:var(--gold);font-weight:800;margin-bottom:4px}
+  .split2-note-card.active{opacity:1;border-color:var(--gold);box-shadow:0 0 24px rgba(224,162,60,.24)}
 
   /* prog3：走路 → 腳踏車 → 汽車 */
   .prog3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:stretch;width:100%;margin-top:24px}
@@ -148,24 +152,24 @@
   .prog3 .pa{display:flex;align-items:center;color:var(--gold);font-size:1.5rem}
 
   /* before / after 視覺化 */
-  .ba{width:100%;display:flex;flex-direction:column;gap:18px;margin-top:14px}
+  .ba{width:100%;display:flex;flex-direction:column;gap:14px;margin-top:10px}
   .ba-row{display:grid;grid-template-columns:110px 1fr;gap:22px;align-items:stretch}
   .ba-label{font-family:Georgia,serif;font-weight:700;font-size:var(--fs-h3);text-transform:uppercase;letter-spacing:.14em;text-align:center;border:1px solid var(--line-soft);border-radius:12px;padding:16px 8px;color:var(--ink-3);display:flex;align-items:center;justify-content:center}
   .ba-after .ba-label{color:var(--gold);border-color:var(--line)}
   .ba-block{background:var(--panel);border:1px solid var(--line-soft);border-radius:14px;padding:22px 26px;color:var(--ink-2);font-size:var(--fs-body);line-height:var(--lh-body)}
   .ba-content{width:100%}
   .ba-after .prog3{margin-top:0}
-  .ba-points{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;height:100%}
-  .ba-points .ba-pt{background:var(--panel);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;transition:opacity .35s ease,border-color .35s ease,box-shadow .35s ease}
+  .ba-points{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;height:100%}
+  .ba-points .ba-pt{background:var(--panel);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;text-align:center;display:flex;flex-direction:column;justify-content:center;transition:opacity .35s ease,border-color .35s ease,box-shadow .35s ease}
   .ba-points .ba-pt b{display:block;color:var(--ink-3);font-size:var(--fs-h3);font-weight:800;margin-bottom:6px}
   .ba-points .ba-pt span{color:var(--ink-2);font-size:var(--fs-cap);line-height:1.5}
-  .ba-pt.dim,.ba-after .pg.dim{opacity:.3}
-  .ba-pt.active,.ba-after .pg.active{border-color:var(--gold);box-shadow:0 0 24px rgba(224,162,60,.3)}
-  .ba-flow-arrow{align-self:center;color:var(--gold);font-size:1.9rem;line-height:1;margin:-4px 0 -2px 132px}
-  .human-node{margin-left:132px;background:linear-gradient(165deg,rgba(224,162,60,.15),rgba(224,162,60,.04));border:1px solid var(--line);border-radius:14px;padding:16px 22px;color:var(--ink-2);font-size:var(--fs-cap);line-height:1.55;transition:opacity .35s ease,border-color .35s ease,box-shadow .35s ease}
-  .human-node b{color:var(--gold);font-size:var(--fs-body)}
-  .human-node.dim{opacity:.3}
-  .human-node.active{border-color:var(--gold);box-shadow:0 0 24px rgba(224,162,60,.24)}
+  .ba-points .pa{display:flex;align-items:center;color:var(--gold);font-size:1.5rem}
+  .ba-pt.dim,.ba-after .pg.dim,.human-node.dim{opacity:.3}
+  .ba-pt.active,.ba-after .pg.active,.human-node.active{border-color:var(--gold);box-shadow:0 0 24px rgba(224,162,60,.3)}
+  .human-nodes{margin-left:132px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px}
+  .human-node{background:linear-gradient(165deg,rgba(224,162,60,.15),rgba(224,162,60,.04));border:1px solid var(--line);border-radius:14px;padding:18px 20px;color:var(--ink-2);font-size:var(--fs-cap);line-height:1.5;text-align:center;display:flex;flex-direction:column;justify-content:center;transition:opacity .35s ease,border-color .35s ease,box-shadow .35s ease}
+  .human-node b{display:block;color:var(--gold);font-size:var(--fs-body);margin-bottom:6px}
+  .human-nodes .pa{display:flex;align-items:center;opacity:0}
 
   /* proposal bridge */
   .proposal-bridge{display:grid;grid-template-columns:.88fr 1.12fr;gap:36px;align-items:center;width:100%}
@@ -177,6 +181,9 @@
   .bridge-card h4{font-size:var(--fs-h3);color:var(--gold);margin-bottom:8px}
   .bridge-card p{color:var(--ink-2);font-size:var(--fs-cap);line-height:1.6}
   .bridge-card.final{grid-column:1/-1;background:linear-gradient(165deg,var(--panel-2),var(--panel));border-color:var(--line)}
+  .proposal-map-copy{display:flex;flex-direction:column;gap:18px}
+  .proposal-map-copy .bridge-punch{margin-bottom:4px}
+  .proposal-map-copy .bridge-card{padding:22px 26px}
 
   /* whatif / pills */
   .whatif{width:100%;background:linear-gradient(150deg,#2c3947,#202935);border:1px solid var(--line);border-radius:26px;padding:54px 56px;text-align:center}
@@ -240,6 +247,20 @@
   .why-card h4{font-size:var(--fs-h3);font-weight:800;color:var(--gold);margin-bottom:10px}
   .why-card p{color:var(--ink-2);font-size:var(--fs-body);line-height:1.7}
   .why-card.final{grid-column:1/-1;border-color:var(--line);background:linear-gradient(165deg,var(--panel-2),var(--panel))}
+  .qa-lead{color:var(--ink-2);font-size:var(--fs-lead);line-height:var(--lh-body);margin-bottom:24px}
+  .quote-band{border-left:4px solid var(--gold);background:linear-gradient(90deg,rgba(224,162,60,.13),rgba(255,255,255,.035));border-radius:0 16px 16px 0;padding:22px 28px;margin-bottom:28px;color:var(--ink);font-size:var(--fs-h2);font-weight:900;line-height:1.55}
+  .compare2{display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%}
+  .compare-card{background:var(--panel);border:1px solid var(--line-soft);border-radius:18px;padding:26px 28px}
+  .compare-card.public{border-color:var(--line);background:linear-gradient(165deg,rgba(224,162,60,.12),rgba(255,255,255,.04))}
+  .compare-card .ey{font-size:var(--fs-cap);letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase;margin-bottom:16px}
+  .compare-card.public .ey{color:var(--gold)}
+  .compare-card h4{font-size:var(--fs-h2);font-weight:900;margin-bottom:16px}
+  .compare-card li{list-style:none;color:var(--ink-2);font-size:var(--fs-body);line-height:var(--lh-list);padding:6px 0 6px 18px;position:relative}
+  .compare-card li::before{content:"•";position:absolute;left:0;color:var(--gold)}
+  .junyi-bridge{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;margin-top:26px}
+  .junyi-card{background:var(--panel);border:1px solid var(--line-soft);border-radius:16px;padding:22px 24px}
+  .junyi-card h4{font-size:var(--fs-h3);font-weight:900;color:var(--gold);margin-bottom:10px}
+  .junyi-card p{color:var(--ink-2);font-size:var(--fs-cap);line-height:1.65}
 
   /* roadmap */
   .road{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:18px;align-items:stretch;width:100%}
@@ -284,6 +305,9 @@
   .limits .card p{color:var(--ink-2);font-size:var(--fs-body);line-height:var(--lh-body)}
   .limits .card.dim{opacity:.35}
   .limits .card.active{border-color:var(--gold);transform:scale(1.02)}
+  .limits-intro{color:var(--ink-2);font-size:var(--fs-lead);line-height:var(--lh-body);margin-bottom:28px;transition:opacity .35s ease,transform .35s ease}
+  .limits-intro.active{opacity:1;transform:scale(1.01)}
+  .limits-intro.dim{opacity:.38}
 
   /* ===== SELF 循環 step 動畫 ===== */
   .jnode{transition:transform .5s cubic-bezier(.34,1.4,.5,1),opacity .4s ease}
@@ -389,47 +413,22 @@
     </div>
   </section>
 
-  <!-- 5 本提案承接 -->
-  <section class="slide">
-    <div class="head"><span class="kicker">01 · 重新定義問題</span><h2 class="s-title">本提案：把探索資源串成可長期運作的系統</h2><div class="bar"></div></div>
-    <div class="body">
-      <div class="proposal-bridge">
-        <div>
-          <p class="bridge-punch">缺的不是更多單點資源，<br>而是一套<em>低成本、可長期、能累積資料</em>，並在關鍵時刻接上真人的探索系統。</p>
-          <p class="bridge-copy">本提案要補上的，是 DreamMore 已經證明重要、但難以完全靠人力規模化的那一段：讓學生在活動前後都能持續探索，讓 mentor 把時間留給真正需要人的地方。</p>
-        </div>
-        <div class="bridge-cards">
-          <div class="bridge-card"><h4>低成本</h4><p>讓沒有能力參加高價探索營的學生，也能先被 AI 承接與引導。</p></div>
-          <div class="bridge-card"><h4>可長期</h4><p>不只服務 12 週，而是陪學生持續整理、行動、復盤與修正方向。</p></div>
-          <div class="bridge-card"><h4>能累積資料</h4><p>測驗、對話、行動與反思被整理成個人探索檔案，不必每次從零開始。</p></div>
-          <div class="bridge-card"><h4>接上真人</h4><p>當學生遇到情緒、家庭、財務、自我認同或現實判斷時，再交給真人深度陪伴。</p></div>
-          <div class="bridge-card final"><h4>AI × DreamMore</h4><p>AI 負責把探索系統化；DreamMore 負責把學生真正接住。</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 6 為什麼不能只靠真人服務 -->
   <section class="slide" data-steps="5">
     <div class="head"><span class="kicker">02 · 先說清楚</span><h2 class="s-title">為什麼不能只靠真人服務？</h2><div class="bar"></div></div>
     <div class="body">
-      <p class="lead" style="margin-bottom:16px">真正高品質的生涯探索，需要<span class="gold">深度個人化</span>、<span class="gold">長期陪伴</span>與<span class="gold">資料高度整合</span>——這正是真人教練、高品質探索營與 DreamMore 這類公益計畫最擅長的事。但即使做得再好，仍會遇到四個共同限制：</p>
-      <div class="kwtags">
-        <span>深度個人化</span>
-        <span>長期陪伴</span>
-        <span>資料高度整合</span>
-      </div>
+      <p class="limits-intro" data-step="0">真正高品質的生涯探索，需要<span class="gold">深度個人化</span>、<span class="gold">長期陪伴</span>與<span class="gold">資料高度整合</span>——<br>這正是真人教練、高品質探索營與 DreamMore 這類公益計畫最擅長的事。但即使做得再好，仍會遇到四個共同限制：</p>
       <div class="limits">
-        <div class="card" data-step="0"><div class="h">01　高度仰賴人力，難以普及</div><p>名額有限、成本較高，難以讓每位學生在活動前後都被持續陪伴。</p></div>
-        <div class="card" data-step="1"><div class="h">02　學生終究會離開服務</div><p>活動結束、mentor 更換時，學生需要自己知道怎麼整理、形成假設、設計行動與復盤。</p></div>
-        <div class="card" data-step="2"><div class="h">03　不是每個學生都準備好和真人對話</div><p>有些學生還說不清楚迷惘，也不一定敢開口；AI 可以先低門檻承接，等學生準備好再接上真人。</p></div>
-        <div class="card" data-step="3"><div class="h">04　資料不容易累積與交接</div><p>測驗、任務、反思與對談紀錄分散各處；換 mentor、換老師、跨梯次就容易打掉重練。</p></div>
+        <div class="card" data-step="1"><div class="h">01　高度仰賴人力，難以普及</div><p>名額有限、成本較高，難以讓每位學生在活動前後都被持續陪伴。</p></div>
+        <div class="card" data-step="2"><div class="h">02　學生終究會離開服務</div><p>活動結束、mentor 更換時，學生需要自己知道怎麼整理、形成假設、設計行動與復盤。</p></div>
+        <div class="card" data-step="3"><div class="h">03　不是每個學生都準備好和真人對話</div><p>有些學生還說不清楚迷惘，也不一定敢開口；AI 可以先低門檻承接，等學生準備好再接上真人。</p></div>
+        <div class="card" data-step="4"><div class="h">04　資料不容易累積與交接</div><p>測驗、任務、反思與對談紀錄分散各處；換 mentor、換老師、跨梯次就容易打掉重練。</p></div>
       </div>
     </div>
   </section>
 
   <!-- 7 AI×真人分工 -->
-  <section class="slide" data-steps="4">
+  <section class="slide" data-steps="5">
     <div class="head"><span class="kicker">02 · 先說清楚</span><h2 class="s-title">AI 不是要取代真人，是接手最累積、最重複的工作</h2><div class="bar"></div></div>
     <div class="body">
       <div class="split2">
@@ -451,13 +450,16 @@
             <li data-step="3">從初稿中看出盲點、敘事問題，與真正需要被看見的亮點</li>
           </ul>
         </div>
-        <div class="split2-note"><b>只有真人，</b>才能陪學生面對家庭、情緒、財務、自我認同等複雜議題；也只有真人，能在學生需要被理解、被同儕看見時，提供關係支持——這是 AI 給不了的。</div>
+        <div class="split2-notes" data-step="4">
+          <div class="split2-note-card"><b>只有真人</b>才能陪學生面對家庭、情緒、財務、自我認同等複雜議題。</div>
+          <div class="split2-note-card"><b>只有真人</b>能在學生需要被理解、被同儕看見時，提供關係支持。</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- 8 走路→腳踏車→汽車 -->
-  <section class="slide" data-steps="7">
+  <section class="slide" data-steps="6">
     <div class="head"><span class="kicker">02 · 先說清楚</span><h2 class="s-title">從被人牽著走，到能自己往前走</h2><div class="bar"></div></div>
     <div class="body">
       <p class="lead" style="margin-bottom:10px">本提案要做的，是讓學生逐步學會使用探索工具：</p>
@@ -467,12 +469,13 @@
           <div class="ba-content">
             <div class="ba-points">
               <div class="ba-pt" data-step="0"><b>重頭說明</b><span>遇到新的助人者，他都要重頭再說一次他的困擾</span></div>
+              <div class="pa">→</div>
               <div class="ba-pt" data-step="1"><b>被動執行</b><span>需要有真人陪他去做，他才會真的去做</span></div>
+              <div class="pa">→</div>
               <div class="ba-pt" data-step="2"><b>結束等待</b><span>單次助人活動結束後，學生也不知道該怎麼辦，只能原地等待下一個資源介入</span></div>
             </div>
           </div>
         </div>
-        <div class="ba-flow-arrow">↓</div>
         <div class="ba-row ba-after">
           <div class="ba-label">After</div>
           <div class="ba-content">
@@ -485,14 +488,152 @@
             </div>
           </div>
         </div>
-        <div class="human-node" data-step="6"><b>真人節點：</b>像駕照培訓班，陪學生判斷路況、理解工具限制，並在家庭、情緒、財務與自我認同等複雜議題出現時接手深度陪伴。</div>
+        <div class="human-nodes">
+          <div class="human-node" data-step="3"><b>真人節點</b><br>在旁邊鼓勵與支持，幫助學生穩定跨出第一步。</div>
+          <div class="pa">→</div>
+          <div class="human-node" data-step="4"><b>真人節點</b><br>陪學生練習平衡，協助處理卡關、害怕、拖延與人際阻力。</div>
+          <div class="pa">→</div>
+          <div class="human-node" data-step="5"><b>真人節點</b><br>像駕照培訓班，教學生判斷路況、理解工具限制與審核 AI 產出。</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 9 SELF循環（逐步動畫） -->
+  <!-- 9 AI 自主探索系統承接 -->
+  <section class="slide">
+    <div class="head"><span class="kicker">03 · 解決方案</span><h2 class="s-title">AI 自主探索系統：把探索資源串成可長期運作的系統</h2><div class="bar"></div></div>
+    <div class="body">
+      <div class="mx-grid">
+        <div class="matrix static">
+          <div class="qline vmid"></div><div class="qline hmid"></div>
+          <div class="dot" style="left:39%;bottom:91%"><div class="pt"></div><div class="t">學校輔導</div></div>
+          <div class="dot" style="left:14%;bottom:28%"><div class="pt"></div><div class="t">心理測驗</div></div>
+          <div class="dot" style="left:7%;bottom:16%"><div class="pt"></div><div class="t">科系資訊平台</div></div>
+          <div class="dot" style="left:32%;bottom:46%"><div class="pt"></div><div class="t">短期活動</div></div>
+          <div class="dot" style="left:90%;bottom:77%"><div class="pt"></div><div class="t">高品質探索營</div></div>
+          <div class="dot" style="left:23%;bottom:37%"><div class="pt"></div><div class="t">一般 AI 工具</div></div>
+          <div class="dot" style="left:61%;bottom:37%"><div class="pt"></div><div class="t">學習歷程</div></div>
+          <div class="dot dream" style="left:80%;bottom:91%"><div class="pt"></div><div class="t">DreamMore</div></div>
+          <div class="dot you" style="left:20%;bottom:76%"><div class="pt"></div><div class="t">本提案</div></div>
+          <div class="axis-x"><span>低成本</span><span>高成本 →</span></div>
+          <div class="axis-y"><span>高陪伴</span><span>低陪伴</span></div>
+        </div>
+        <div class="proposal-map-copy">
+          <p class="bridge-punch">缺的不是更多單點資源，<br>而是一套<em>低成本、可長期、能累積資料</em>，並在關鍵時刻接上真人的探索系統。</p>
+          <div class="bridge-card final"><h4>AI 自主探索系統要補上的位置</h4><p>讓學生在活動前後都能持續探索，讓 mentor 不必重頭蒐集資料，而是把時間留給真正需要人的深度判斷與情緒支持。</p></div>
+          <div class="bridge-card"><h4>AI × DreamMore</h4><p>AI 負責把探索系統化；DreamMore 負責把學生真正接住。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 AI×DreamMore -->
   <section class="slide" data-steps="4">
-    <div class="head"><span class="kicker">03 · 解決方案</span><h2 class="s-title">SELF 探索循環：把探索變成可累積的個人檔案</h2><div class="bar"></div></div>
+    <div class="body">
+      <div class="whatif">
+        <h3>AI 負責把探索系統化，<br><em>DreamMore 負責把學生真正接住</em></h3>
+        <div class="pills3">
+          <div class="pill" data-step="0"><b>會前整理</b><span>學生先被 AI 引導整理好，mentor 不必從零蒐集資料</span></div>
+          <div class="pill" data-step="1"><b>會後追蹤</b><span>啟發不會停在當下，AI 陪學生把行動完成</span></div>
+          <div class="pill" data-step="2"><b>跨次交接</b><span>探索脈絡不因換人、跨梯次而中斷</span></div>
+        </div>
+        <p class="close">AI × DreamMore＝<strong class="gold">規模化的探索支持＋有溫度的深度陪伴</strong>——<br>AI 補上規模化的三個缺口，讓 mentor 的時間留給最珍貴的事：</p>
+        <div class="final-tags">
+          <div class="ftag">真實經驗分享</div>
+          <div class="ftag">深度判斷</div>
+          <div class="ftag">情緒支持</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 Why me -->
+  <section class="slide">
+    <div class="head"><span class="kicker">04 · Why me</span><h2 class="s-title">已驗證、可落地的方法 — 不是從零開始的概念</h2><div class="bar"></div></div>
+    <div class="body">
+      <div class="strip">
+        <div class="sc"><div class="b"><span class="num-anim" data-to="5" data-suffix=" 屆">0</span></div><div class="l">自主探索陪跑營</div></div>
+        <div class="sc"><div class="b"><span class="num-anim" data-to="30" data-suffix=" 位">0</span></div><div class="l">累積付費學員</div></div>
+        <div class="sc"><div class="b"><span class="num-anim" data-to="50" data-suffix=" 萬+">0</span></div><div class="l">累積營收（每位 12,000 元）</div></div>
+        <div class="sc"><div class="b"><span class="num-anim" data-to="250" data-suffix="+">0</span></div><div class="l">生涯諮詢人次</div></div>
+      </div>
+      <div class="strip three">
+        <div class="sc"><div class="b"><span class="num-anim" data-to="125" data-suffix="%">0</span></div><div class="l">職業探索能力（CDSE）提升</div></div>
+        <div class="sc"><div class="b"><span class="num-anim" data-to="87" data-suffix="%">0</span></div><div class="l">探索信心大幅增長</div></div>
+        <div class="sc"><div class="b"><span class="num-anim" data-to="95" data-suffix="%">0</span></div><div class="l">完成 ≥ 6 次行動實驗</div></div>
+      </div>
+      <p class="hook-q" style="margin-top:30px;font-size:var(--fs-h2)">生涯 × 教育 × 系統 × 實戰 ——<br>不是從零提出一個 AI 概念，<em>而是把已驗證的方法做成系統、落地執行</em>。</p>
+    </div>
+  </section>
+
+  <!-- 13 Roadmap（逐步動畫） -->
+  <section class="slide" data-steps="3">
+    <div class="head"><span class="kicker">06 · Roadmap</span><h2 class="s-title">三階段：從 DreamMore 試點到公益模型</h2><div class="bar"></div></div>
+    <div class="body">
+      <div class="road-single">
+        <div class="phase p1 active" data-step="0">
+          <div class="ph">Phase 1 · DreamMore 試點</div>
+          <h4>驗證方法移交後，是否依然有效</h4>
+          <p class="field"><b>對象：</b>10–20 位學生與 mentor／老師</p>
+          <ul><li>完成第一版探索檔案、自我探索與方向分析初稿</li><li>70% 形成探索假設並完成 1 次行動驗證</li></ul>
+        </div>
+        <div class="phase" data-step="1">
+          <div class="ph">Phase 2 · 多梯次／多場域</div>
+          <h4>讓流程在多 mentor、多場域穩定運作</h4>
+          <p class="field"><b>對象：</b>約 100–300 位學生</p>
+          <ul><li>建立跨梯次資料交接、成效追蹤機制</li><li>讓新助人者不必從零開始理解學生</li></ul>
+        </div>
+        <div class="phase" data-step="2">
+          <div class="ph">Phase 3 · 公益 AI 自主探索模型</div>
+          <h4>讓真實探索歷程，取代只追求漂亮成果的學習歷程</h4>
+          <p class="field"><b>對象：</b>更多高中與公益教育場域</p>
+          <ul><li>讓輔導老師與導師更理解學生的真實脈絡</li><li>讓大學教授看見真實探索歷程，而不只是包裝好的成果</li><li>形成可複製的導入流程、系統模板與教育成效指標</li></ul>
+        </div>
+        <div class="road-dots"><span class="active"></span><span></span><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 為什麼公益×均一 -->
+  <section class="slide">
+    <div class="head"><span class="kicker">06 · 為什麼公益、為什麼均一</span><h2 class="s-title">教育平權：從個人化學習，到個人化探索</h2><div class="bar"></div></div>
+    <div class="body">
+      <p class="hook-q">均一處理的是「<em>學科學習不該因出身而受限</em>」；<br>這套系統處理的是「<em>探索自己與未來，也不該因出身而受限</em>」。</p>
+    </div>
+  </section>
+
+  <!-- 14 合作與需求 -->
+  <section class="slide" data-steps="3">
+    <div class="head"><span class="kicker">07 · 合作與需求</span><h2 class="s-title">想和均一一起完成的第一階段試點</h2><div class="bar"></div></div>
+    <div class="body">
+      <div class="asks">
+        <div class="ask" data-step="0"><div class="n">1</div><h4>資金支持</h4><p>目前以 Notion 做原型，體驗仍不完整；希望打造高中版 App／Web，降低使用與運行成本，並支援 AI 對話、探索流程、個人檔案與成效研究。</p></div>
+        <div class="ask" data-step="1"><div class="n">2</div><h4>場域支持</h4><p>協助接觸 DreamMore 與適合的學生、老師／mentor，共同設計符合現場需求的導入流程。</p></div>
+        <div class="ask" data-step="2"><div class="n">3</div><h4>策略支持</h4><p>共同探索教育 AI 從學科學習延伸到自我探索與真人陪伴的可能性，並設計這個試點的教育成效指標。</p></div>
+      </div>
+      <p class="cta-line">下一步，想找一個時間，和均一一起把合作模式與分工談清楚。</p>
+    </div>
+  </section>
+
+  <!-- 11 closing -->
+  <section class="slide hero">
+    <div class="closing" style="max-width:920px">
+      <h2>我希望和均一一起，<br>把<em>高品質探索</em>，<br>變成每個孩子都能取得的<em>基礎教育支持</em>。</h2>
+      <div class="partners" style="margin-top:42px">
+        <span class="reset-logo"><b>RESET</b><span>STUDIO</span></span>
+        <span class="x">×</span>
+        <div class="junyi">
+          <img src="assets/junyi-x-icon.png" width="38" height="38" alt="均一平台教育基金會">
+          <div class="name"><b>均一平台教育基金會</b><small>JUNYI ACADEMY · DREAMMORE</small></div>
+        </div>
+      </div>
+      <p style="margin-top:26px;font-family:Georgia,serif;font-style:italic;color:var(--gold-soft);font-size:var(--fs-h2)">reset your life, enrich your life</p>
+    </div>
+  </section>
+
+  <!-- Q&A SELF循環（逐步動畫） -->
+  <section class="slide" data-steps="5">
+    <div class="head"><span class="kicker">Q&A · 補充說明</span><h2 class="s-title">SELF 探索循環：把探索變成可累積的個人檔案</h2><div class="bar"></div></div>
     <div class="body">
       <div class="j-grid">
         <div class="journey">
@@ -587,118 +728,15 @@
     </div>
   </section>
 
-  <!-- 10 AI×DreamMore -->
-  <section class="slide" data-steps="4">
-    <div class="body">
-      <div class="whatif">
-        <h3>AI 負責把探索系統化，<br><em>DreamMore 負責把學生真正接住</em></h3>
-        <div class="pills3">
-          <div class="pill" data-step="0"><b>會前整理</b><span>學生先被 AI 引導整理好，mentor 不必從零蒐集資料</span></div>
-          <div class="pill" data-step="1"><b>會後追蹤</b><span>啟發不會停在當下，AI 陪學生把行動完成</span></div>
-          <div class="pill" data-step="2"><b>跨次交接</b><span>探索脈絡不因換人、跨梯次而中斷</span></div>
-        </div>
-        <p class="close">AI × DreamMore＝<strong class="gold">規模化的探索支持＋有溫度的深度陪伴</strong>——<br>AI 補上規模化的三個缺口，讓 mentor 的時間留給最珍貴的事：</p>
-        <div class="final-tags">
-          <div class="ftag">真實經驗分享</div>
-          <div class="ftag">深度判斷</div>
-          <div class="ftag">情緒支持</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 11 Why me -->
+  <!-- Q&A 為什麼公益化 -->
   <section class="slide">
-    <div class="head"><span class="kicker">04 · Why me</span><h2 class="s-title">已驗證、可落地的方法 — 不是從零開始的概念</h2><div class="bar"></div></div>
+    <div class="head"><span class="kicker">Q&A · 補充說明</span><h2 class="s-title">為什麼要公益化？</h2><div class="bar"></div></div>
     <div class="body">
-      <div class="strip">
-        <div class="sc"><div class="b"><span class="num-anim" data-to="5" data-suffix=" 屆">0</span></div><div class="l">自主探索陪跑營</div></div>
-        <div class="sc"><div class="b"><span class="num-anim" data-to="30" data-suffix=" 位">0</span></div><div class="l">累積付費學員</div></div>
-        <div class="sc"><div class="b"><span class="num-anim" data-to="50" data-suffix=" 萬+">0</span></div><div class="l">累積營收（每位 12,000 元）</div></div>
-        <div class="sc"><div class="b"><span class="num-anim" data-to="250" data-suffix="+">0</span></div><div class="l">生涯諮詢人次</div></div>
-      </div>
-      <div class="strip three">
-        <div class="sc"><div class="b"><span class="num-anim" data-to="125" data-suffix="%">0</span></div><div class="l">職業探索能力（CDSE）提升</div></div>
-        <div class="sc"><div class="b"><span class="num-anim" data-to="87" data-suffix="%">0</span></div><div class="l">探索信心大幅增長</div></div>
-        <div class="sc"><div class="b"><span class="num-anim" data-to="95" data-suffix="%">0</span></div><div class="l">完成 ≥ 6 次行動實驗</div></div>
-      </div>
-      <p class="hook-q" style="margin-top:30px;font-size:var(--fs-h2)">生涯 × 教育 × 系統 × 實戰 ——<br>不是從零提出一個 AI 概念，<em>而是把已驗證的方法做成系統、落地執行</em>。</p>
-    </div>
-  </section>
-
-  <!-- 12 為什麼公益×均一 -->
-  <section class="slide">
-    <div class="head"><span class="kicker">05 · 為什麼公益、為什麼均一</span><h2 class="s-title">教育平權：從個人化學習，到個人化探索</h2><div class="bar"></div></div>
-    <div class="body">
-      <div class="kpis">
-        <span class="kpi">教育平權</span>
-        <span class="kpi">個人化學習</span>
-        <span class="kpi">公益科技</span>
-        <span class="kpi">AI 教育前瞻性</span>
-        <span class="kpi">真實教育現場</span>
-      </div>
       <div class="why-public">
-        <div class="why-card"><h4>為什麼要公益化？</h4><p>高品質探索現在常被時間、名額與價格限制住；最需要支持的學生，反而最可能只能用零散資源和一般 AI 工具自己摸索。</p></div>
-        <div class="why-card"><h4>為什麼是均一？</h4><p>均一長期處理的是「學科學習不該因出身而受限」；這套系統處理的是「探索自己與未來，也不該因出身而受限」。</p></div>
+        <div class="why-card"><h4>高品質探索不該只屬於付得起的人</h4><p>現在的深度探索常被時間、名額與價格限制住；最需要支持的學生，反而最可能只能用零散資源和一般 AI 工具自己摸索。</p></div>
+        <div class="why-card"><h4>AI 可以降低門檻，但不能取代真人</h4><p>AI 適合承接整理、追蹤與初步引導；真人則保留在情緒、家庭、財務、自我認同與深度判斷等關鍵節點。</p></div>
         <div class="why-card final"><h4>公益試點的意義</h4><p>不只是做一套工具，而是一起驗證：教育 AI 能否從學科學習，延伸到自我探索、真人陪伴與長期生涯支持。</p></div>
       </div>
-    </div>
-  </section>
-
-  <!-- 13 Roadmap（逐步動畫） -->
-  <section class="slide" data-steps="3">
-    <div class="head"><span class="kicker">06 · Roadmap</span><h2 class="s-title">三階段：從 DreamMore 試點到公益模型</h2><div class="bar"></div></div>
-    <div class="body">
-      <div class="road-single">
-        <div class="phase p1 active" data-step="0">
-          <div class="ph">Phase 1 · DreamMore 試點</div>
-          <h4>驗證方法移交後，是否依然有效</h4>
-          <p class="field"><b>對象：</b>10–20 位學生與 mentor／老師</p>
-          <ul><li>完成第一版探索檔案、自我探索與方向分析初稿</li><li>70% 形成探索假設並完成 1 次行動驗證</li></ul>
-        </div>
-        <div class="phase" data-step="1">
-          <div class="ph">Phase 2 · 多梯次／多場域</div>
-          <h4>讓流程在多 mentor、多場域穩定運作</h4>
-          <p class="field"><b>對象：</b>約 100–300 位學生</p>
-          <ul><li>建立跨梯次資料交接、成效追蹤機制</li><li>讓新助人者不必從零開始理解學生</li></ul>
-        </div>
-        <div class="phase" data-step="2">
-          <div class="ph">Phase 3 · 公益 AI 自主探索模型</div>
-          <h4>讓真實探索歷程，取代只追求漂亮成果的學習歷程</h4>
-          <p class="field"><b>對象：</b>更多高中與公益教育場域</p>
-          <ul><li>讓輔導老師與導師更理解學生的真實脈絡</li><li>讓大學教授看見真實探索歷程，而不只是包裝好的成果</li><li>形成可複製的導入流程、系統模板與教育成效指標</li></ul>
-        </div>
-        <div class="road-dots"><span class="active"></span><span></span><span></span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 14 合作與需求 -->
-  <section class="slide" data-steps="3">
-    <div class="head"><span class="kicker">07 · 合作與需求</span><h2 class="s-title">想和均一一起完成的第一階段試點</h2><div class="bar"></div></div>
-    <div class="body">
-      <div class="asks">
-        <div class="ask" data-step="0"><div class="n">1</div><h4>資金支持</h4><p>目前以 Notion 做原型，體驗仍不完整；希望打造高中版 App／Web，降低使用與運行成本，並支援 AI 對話、探索流程、個人檔案與成效研究。</p></div>
-        <div class="ask" data-step="1"><div class="n">2</div><h4>場域支持</h4><p>協助接觸 DreamMore 與適合的學生、老師／mentor，共同設計符合現場需求的導入流程。</p></div>
-        <div class="ask" data-step="2"><div class="n">3</div><h4>策略支持</h4><p>共同探索教育 AI 從學科學習延伸到自我探索與真人陪伴的可能性，並設計這個試點的教育成效指標。</p></div>
-      </div>
-      <p class="cta-line">下一步，想找一個時間，和均一一起把合作模式與分工談清楚。</p>
-    </div>
-  </section>
-
-  <!-- 11 closing -->
-  <section class="slide hero">
-    <div class="closing" style="max-width:920px">
-      <h2>我希望和均一一起，<br>把<em>高品質探索</em>，<br>變成每個孩子都能取得的<em>基礎教育支持</em>。</h2>
-      <div class="partners" style="margin-top:42px">
-        <span class="reset-logo"><b>RESET</b><span>STUDIO</span></span>
-        <span class="x">×</span>
-        <div class="junyi">
-          <img src="assets/junyi-x-icon.png" width="38" height="38" alt="均一平台教育基金會">
-          <div class="name"><b>均一平台教育基金會</b><small>JUNYI ACADEMY · DREAMMORE</small></div>
-        </div>
-      </div>
-      <p style="margin-top:26px;font-family:Georgia,serif;font-style:italic;color:var(--gold-soft);font-size:var(--fs-h2)">reset your life, enrich your life</p>
     </div>
   </section>
 
@@ -711,7 +749,7 @@
   document.getElementById('tot').textContent=String(total).padStart(2,'0');
 
   /* 逐步動畫頁面：slide index -> 總步數 */
-  const FRAG={3:7,5:4,6:4,7:7,8:5,9:4,12:3,13:3};
+  const FRAG={3:7,4:5,5:5,6:6,8:4,10:3,12:3,14:5};
 
   /* 矩陣頁逐步內容（取材自 v2 SOL，依簡報格式精簡） */
   const MX_STEPS={
@@ -763,6 +801,11 @@
 
   /* 為什麼不能只靠真人服務：一次強調一張卡 */
   function renderLimits(step){
+    const intro=document.querySelector('#stage .limits-intro[data-step]');
+    if(intro){
+      intro.classList.toggle('active',step===0);
+      intro.classList.toggle('dim',step!==0);
+    }
     document.querySelectorAll('#stage .limits .card[data-step]').forEach(c=>{
       const s=parseInt(c.dataset.step,10);
       c.classList.toggle('active',s===step);
@@ -776,6 +819,9 @@
       const s=parseInt(li.dataset.step,10);
       li.classList.toggle('active',s===step);
       li.classList.toggle('dim',s!==step);
+    });
+    document.querySelectorAll('#stage .split2-note-card').forEach(card=>{
+      card.classList.toggle('active',step>=4);
     });
   }
 
@@ -833,13 +879,13 @@
 
   function renderFrag(){
     if(i===3) renderMx(jStep);
-    else if(i===5) renderLimits(jStep);
-    else if(i===6) renderSplit2(jStep);
-    else if(i===7) renderBA(jStep);
-    else if(i===8) renderSelf(jStep);
-    else if(i===9) renderWhatif(jStep);
-    else if(i===12) renderRoad(jStep);
-    else if(i===13) renderAsks(jStep);
+    else if(i===4) renderLimits(jStep);
+    else if(i===5) renderSplit2(jStep);
+    else if(i===6) renderBA(jStep);
+    else if(i===8) renderWhatif(jStep);
+    else if(i===10) renderRoad(jStep);
+    else if(i===12) renderAsks(jStep);
+    else if(i===14) renderSelf(jStep);
   }
 
   function show(n){
@@ -848,7 +894,7 @@
     cur.textContent=String(i+1).padStart(2,'0');
     prog.style.width=((i+1)/total*100)+'%';
     renderFrag();
-    if(i===10) runCountUp();
+    if(i===9) runCountUp();
   }
   function next(){
     if(FRAG[i] && jStep<FRAG[i]-1){ jStep++; renderFrag(); return; }
