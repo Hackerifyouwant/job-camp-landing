@@ -82,10 +82,10 @@
 
   /* ===== HOOK 案例（愛因斯坦／賈伯斯） ===== */
   .talent-bg{background:#101720}
-  .talent-bg::before{content:"";position:absolute;inset:0;background:url("assets/einstein-jobs-talent-bg.png") center 58%/cover no-repeat;opacity:.84}
+  .talent-bg::before{content:"";position:absolute;inset:0;background:url("assets/einstein-jobs-talent-bg.png") center 34%/cover no-repeat;opacity:.84}
   .talent-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,19,26,.34),rgba(14,19,26,.12) 42%,rgba(14,19,26,.76)),linear-gradient(90deg,rgba(14,19,26,.54),rgba(14,19,26,.20) 33%,rgba(14,19,26,.20) 67%,rgba(14,19,26,.54))}
   .talent-bg > *{position:relative;z-index:1}
-  .talent-bg .head,.talent-bg .body{transform:translateY(22px)}
+  .talent-bg .body{transform:translateY(58px)}
   .cases2{display:grid;grid-template-columns:1fr 1fr;gap:28px;width:100%}
   .cases2 .case{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:38px 32px;text-align:center}
   .cases2 .case-name{font-size:var(--fs-h2);font-weight:700;color:var(--gold);margin-bottom:16px}
@@ -370,8 +370,8 @@
     <div class="head"><span class="kicker">為什麼是現在</span><h2 class="s-title">天賦，不是一開始就會被看見的</h2><div class="bar"></div></div>
     <div class="body">
       <div class="cases2">
-        <div class="case"><div class="case-name">如果愛因斯坦</div><p>從來沒有機會接觸物理，他也許只會被看見是一位普通的專利局職員。</p></div>
-        <div class="case"><div class="case-name">如果賈伯斯</div><p>從來沒有接觸電腦、設計與創作，他也許只是一個不適應傳統教育體制的叛逆學生。</p></div>
+        <div class="case"><div class="case-name">如果愛因斯坦</div><p>從來沒有機會接觸物理，<br>他也許只會被看見是一位普通的專利局職員。</p></div>
+        <div class="case"><div class="case-name">如果賈伯斯</div><p>從來沒有接觸電腦、設計與創作，<br>他也許只是一個不適應傳統教育體制的叛逆學生。</p></div>
       </div>
       <p class="lead talent-question" style="text-align:center">在台灣，有多少人是這樣錯過自己的天賦的呢？</p>
     </div>
@@ -599,6 +599,12 @@
     <div class="head"><span class="kicker">06 · 為什麼公益、為什麼均一</span><h2 class="s-title">教育平權：從個人化學習，到個人化探索</h2><div class="bar"></div></div>
     <div class="body">
       <p class="hook-q">均一處理的是「<em>學科學習不該因出身而受限</em>」；<br>這套系統處理的是「<em>探索自己與未來，也不該因出身而受限</em>」。</p>
+      <div class="junyi-bridge">
+        <div class="junyi-card"><h4>教育平權</h4><p>生涯探索也不應只屬於能付費買顧問與營隊的家庭。</p></div>
+        <div class="junyi-card"><h4>個人化探索</h4><p>學生需要的不只是學習進度，也包括迷惘、經驗、興趣與未來想像的整理。</p></div>
+        <div class="junyi-card"><h4>AI 教育前瞻性</h4><p>AI 不只是答案機器，也可以成為學生整理問題、形成假設、設計行動與完成反思的探索工具。</p></div>
+        <div class="junyi-card"><h4>終身學習者</h4><p>真正的學習者，不只會學科知識，也知道如何認識自己、面對不確定，並持續修正方向。</p></div>
+      </div>
     </div>
   </section>
 
@@ -732,10 +738,27 @@
   <section class="slide">
     <div class="head"><span class="kicker">Q&A · 補充說明</span><h2 class="s-title">為什麼要公益化？</h2><div class="bar"></div></div>
     <div class="body">
-      <div class="why-public">
-        <div class="why-card"><h4>高品質探索不該只屬於付得起的人</h4><p>現在的深度探索常被時間、名額與價格限制住；最需要支持的學生，反而最可能只能用零散資源和一般 AI 工具自己摸索。</p></div>
-        <div class="why-card"><h4>AI 可以降低門檻，但不能取代真人</h4><p>AI 適合承接整理、追蹤與初步引導；真人則保留在情緒、家庭、財務、自我認同與深度判斷等關鍵節點。</p></div>
-        <div class="why-card final"><h4>公益試點的意義</h4><p>不只是做一套工具，而是一起驗證：教育 AI 能否從學科學習，延伸到自我探索、真人陪伴與長期生涯支持。</p></div>
+      <p class="qa-lead">我會想從公益場域開始驗證，不是因為這套系統不能商業化，而是因為生涯探索一旦只走純商業市場，很容易被付費方的升學焦慮牽引。</p>
+      <div class="quote-band">這不只是「誰付得起」的問題，更是「服務內容會被什麼需求牽引」的問題。</div>
+      <div class="compare2">
+        <div class="compare-card">
+          <div class="ey">Commercial Pull</div>
+          <h4>如果直接進入付費市場</h4>
+          <ul>
+            <li>容易被高價顧問、升學包裝與學習歷程服務吸走。</li>
+            <li>最後花最多時間的，可能不是陪學生真正思考、探索、行動與反思。</li>
+            <li>服務內容會被「提高升學競爭力」牽引，而不是被學生的長期探索牽引。</li>
+          </ul>
+        </div>
+        <div class="compare-card public">
+          <div class="ey">Public Interest First</div>
+          <h4>如果先從公益場域驗證</h4>
+          <ul>
+            <li>幫學生長出使用工具的能力。</li>
+            <li>幫學生整理自己、探索世界、面對不確定。</li>
+            <li>讓系統先回到教育本質，而不是讓學生更早進入升學包裝流程。</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
